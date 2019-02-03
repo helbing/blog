@@ -16,6 +16,7 @@ before_script:
 before_insall:
   - openssl aes-256-cbc -K $encrypted_97d432d3ed20_key -iv $encrypted_97d432d3ed20_iv -in id_rsa.enc -out ~\/.ssh/id_rsa -d
   - chmod 600 ~/.ssh/id_rsa
+  - echo -e "Host 139.199.176.47\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 install:
   - yarn install
 script:
