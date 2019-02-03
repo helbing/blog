@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>
     
-      WHITE
+      tags
     
   </title>
   
@@ -39,11 +39,11 @@
       <ul>
         
           
-            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/">Home</a></li>
           
         
           
-            <li><a href="/tags">Tags</a></li>
+            <li><a href="/tags" class="active">Tags</a></li>
           
         
           
@@ -104,47 +104,40 @@
     <div class="container">
       <main>
         
-          
+          <div id="tag-cloud">
+            <input type="text" placeholder="Input And Enter To Search">
+            <div class="wrapper">
+              
+            </div>
+          </div>
+          <script>
+            const tagCloudInput = document.querySelector("#tag-cloud input");
+            const tagList = document.querySelectorAll("#tag-cloud a");
 
-<article class="article">
-  <div class="cover left-item" style="background-image:url();">
-    <img src="">
-  </div>
-  <div class="content right-item">
-    <div class="wrapper">
-      <time>FEBRUARY 3, 2019</time>
-      <h2 class="title">
-        <a href="/2019/02/03/hello-world/">Hello World</a>
-      </h2>
-      <div class="description">
-        
-      </div>
-      <ul class="tags">
-        
-      </ul>
-    </div>
-  </div>
-</article>
+            tagCloudInput.addEventListener("keydown", event => {
+              if (event.code == "Enter") {
 
-        
-        
-        
-        <ul class="paginate">
-  <li>
-    <a href="javascript:void(0)"><i class="fas fa-arrow-left"></i>&nbsp;PREV</a>
-  </li>
-  
-    <li>1 / 1</li>
-  
-  <li>
-    <a href="javascript:void(0)">NEXT&nbsp;<i class="fas fa-arrow-right"></i></a>
-  </li>
-</ul>
+                let searchValue = tagCloudInput.value.trim();
 
-        <div class="back-to-top">
-  <button><i class="fas fa-angle-up"></i>TOP</button>
-</div>
+                if (searchValue == '') {
+                  tagList.forEach(tag => {
+                    tag.style.display = 'block';
+                  });
 
+                  return;
+                }
+
+                tagList.forEach(tag => {
+                  if (tag.text.toLowerCase().indexOf(searchValue.toLowerCase()) > -1) {
+                    tag.style.display = 'block';
+                  } else {
+                    tag.style.display = 'none';
+                  }
+                });
+              }
+            });
+          </script>
+        
       </main>
     </div>
   </body>
