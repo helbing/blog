@@ -499,8 +499,9 @@ aside#search {
     aside#search > .wrapper .back-to-top {
       display: none; }
 
-/* gitalk-container */
-#gitalk-container {
+/* disqus_thread */
+#disqus_thread {
+  margin-top: 3.125rem;
   padding: 0 3.125rem; }
 
 @media (min-width: 576px) {
