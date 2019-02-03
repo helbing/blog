@@ -25,6 +25,3 @@ script:
   - hexo generate
 after_success:
   - rsync -rv --delete -e 'ssh -o stricthostkeychecking=no' public/ ubuntu@139.199.176.47:/var/www/blog
-before_install:
-  - openssl aes-256-cbc -K $encrypted_990c7d05d5a0_key -iv $encrypted_990c7d05d5a0_iv
-    -in tx_rsa.enc -out ~\/.ssh/tx_rsa -d
