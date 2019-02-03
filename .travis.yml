@@ -8,15 +8,15 @@ cache:
 branchs:
   only:
     - master
+before_install:
+  - openssl aes-256-cbc -K $encrypted_990c7d05d5a0_key -iv $encrypted_990c7d05d5a0_iv -in id_rsa.enc -out ~\/.ssh/id_rsa -d
 before_script:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
   - yarn install
   - yarn global add hexo-cli
-install:
-  - yarn install
 script:
   - hexo clean
   - hexo generate
 after_success:
-  - rsync -rv --delete -e 'ssh -o stricthostkeychecking=no' public/ ubuntu@139.199.176.47:/var/www/blog
+  - rsync -rv --delete -e 'ssh -o stricthostkeychecking=no' public/ $rsync_dest
