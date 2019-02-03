@@ -14,7 +14,8 @@ before_script:
   - yarn install
   - yarn global add hexo-cli
 before_insall:
-  - openssl aes-256-cbc -K $encrypted_97d432d3ed20_key -iv $encrypted_97d432d3ed20_iv -in id_rsa.enc -out ~\/.ssh/id_rsa -d
+  - openssl aes-256-cbc -K $encrypted_97d432d3ed20_key -iv $encrypted_97d432d3ed20_iv
+    -in id_rsa.enc -out ~\/.ssh/id_rsa -d
   - chmod 600 ~/.ssh/id_rsa
   - echo -e "Host 139.199.176.47\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 install:
@@ -24,3 +25,6 @@ script:
   - hexo generate
 after_success:
   - rsync -rv --delete -e 'ssh -o stricthostkeychecking=no' public/ ubuntu@139.199.176.47:/var/www/blog
+before_install:
+  - openssl aes-256-cbc -K $encrypted_990c7d05d5a0_key -iv $encrypted_990c7d05d5a0_iv
+    -in tx_rsa.enc -out ~\/.ssh/tx_rsa -d
