@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.helbing.cn/"/>
-  <updated>2019-02-04T00:40:50.875Z</updated>
+  <updated>2019-02-08T07:58:14.875Z</updated>
   <id>https://blog.helbing.cn/</id>
   
   <author>
@@ -17,23 +17,26 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hello World</title>
-    <link href="https://blog.helbing.cn/2019/02/04/hello-world/"/>
-    <id>https://blog.helbing.cn/2019/02/04/hello-world/</id>
-    <published>2019-02-04T00:40:50.875Z</published>
-    <updated>2019-02-04T00:40:50.875Z</updated>
+    <title>使用 Travis 部署 Hexo 博客</title>
+    <link href="https://blog.helbing.cn/2019/02/04/deploy-hexo-blog-with-travis/"/>
+    <id>https://blog.helbing.cn/2019/02/04/deploy-hexo-blog-with-travis/</id>
+    <published>2019-02-04T00:00:00.000Z</published>
+    <updated>2019-02-08T07:58:14.875Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;</code></pre><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<p>首先我是默认看这篇博文的你是已经有自己的静态博客了，只是还缺少一套可以自动化部署博客的手段</p><h2 id="注册登录-Travis"><a href="#注册登录-Travis" class="headerlink" title="注册登录 Travis"></a>注册登录 Travis</h2><p>打开 Chrome 浏览器，进入 Travis 的<a href="https://travis-ci.com" target="_blank" rel="noopener">官网</a>，记住是 <code>.com</code> 结尾的，而不是 <code>.org</code> 结尾的。接下来凭你的直觉去添加项目</p><p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20190204090319.png" alt=""></p><h2 id="安装-Travis"><a href="#安装-Travis" class="headerlink" title="安装 Travis"></a>安装 Travis</h2><p>在安装 Travis 前首先我们得重新安装 Ruby 环境，macOS 自带的 Ruby 环境太老了</p><pre><code class="bash">brew install ruby</code></pre><p>添加环境变量，由于我用的是 zsh ，所以我是在 <code>~/.zshrc</code> 中添加环境变量</p><pre><code class="bash"># rubyexport PATH=&quot;/usr/local/opt/ruby/bin:$PATH&quot;# gemexport PATH=&quot;$PATH:`gem env gemdir`/bin&quot;</code></pre><p>重新加载配置</p><pre><code class="bash">source ~/.zshrc</code></pre><p>进入正戏，开始安装 Travis</p><pre><code class="bash">gem install travis</code></pre><p>执行下 <code>travis</code>，如果有反应说明就是安装完成了</p><h2 id="登录-Travis"><a href="#登录-Travis" class="headerlink" title="登录 Travis"></a>登录 Travis</h2><p>到你的博客目录执行</p><pre><code class="bash">travis login --com --auto</code></pre><p>按照它的提示进行输入即可登录成功</p><h2 id="申请-GITHUB-TOKEN"><a href="#申请-GITHUB-TOKEN" class="headerlink" title="申请 GITHUB_TOKEN"></a>申请 GITHUB_TOKEN</h2><p>打开 Github 的 <a href="https://github.com/settings/tokens" target="_blank" rel="noopener">Personal access tokens</a>，然后点击 <code>Generate new token</code> 按钮</p><p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20190204091334.png" alt=""></p><p>权限部分我们只需要勾选 <code>repo</code></p><p>为了防止 GITHUB TOKEN 泄露，我们添加一个环境变量。在你的 Travis 项目中对应的 Setting (More options -&gt; Settings) 页面添加环境变量</p><p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20190204092112.png" alt=""></p><h2 id="配置-travis-yml"><a href="#配置-travis-yml" class="headerlink" title="配置 .travis.yml"></a>配置 .travis.yml</h2><p>在你的博客根目录新建 <code>.travis.yml</code></p><pre><code class="yaml">language: node_jssudo: requirednode_js: stablecache:  yarn: true  directories:    - node_modulesbranchs:  only:    - masterbefore_script:  - curl -o- -L https://yarnpkg.com/install.sh | bash  - export PATH=&quot;$HOME/.yarn/bin:$PATH&quot;  - yarn install  - yarn global add hexo-cliscript:  - hexo clean  - hexo generate# 部署方式为 github page# master 分支有提交的话触发 Travis 自动部署# 编译完成后，将 public/ 目录下的代码提交到仓库的 gh-pages 分支deploy:  provider: pages  skip-cleanup: true  github-token: $GITHUB_TOKEN  keep-history: true  on:    branch: master  target-branch: gh-pages  local-dir: public/  verbose: true</code></pre><p>之后当你在 master 分支提交代码后，就会自动触发部署了</p><h2 id="配置自定义域名"><a href="#配置自定义域名" class="headerlink" title="配置自定义域名"></a>配置自定义域名</h2><p>Github page 提供自定义域名配置，打开你的博客仓库的的 Settings 页面进行配置</p><p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20190208001910.png" alt=""></p><p>然后在博客根目录的 <code>source</code> 目录下添加一个 <code>CNAME</code> 文件，然后写入你的域名</p><pre><code class="bash">blog.helbing.cn</code></pre><p>不用担心 HTTPS 证书的问题，只要你勾选了 <code>Enforce HTTPS</code>，Github 会自动帮你到 <a href="https://letsencrypt.org/" target="_blank" rel="noopener">letsencrypt</a> 那里申请免费的 HTTPS 证书</p>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-      
+      相信很多人都有自己的静态博客，但是部署方式可能不是采用自动化部署的方式。像我之前就是通过手动编译和部署的方式来部署我的博客到VPS上，Travis 是一款免费的自动化部署工具，接下来我将介绍如何用 Travis 来部署静态博客。因为我的电脑是 macOS 操作系统，所以博文中的操作都是基本 macOS 操作系统的，Windows 操作系统上不一定适用
     
     </summary>
     
+    
+      <category term="travis" scheme="https://blog.helbing.cn/tags/travis/"/>
+    
+      <category term="git" scheme="https://blog.helbing.cn/tags/git/"/>
+    
+      <category term="hexo" scheme="https://blog.helbing.cn/tags/hexo/"/>
     
   </entry>
   

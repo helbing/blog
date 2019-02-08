@@ -228,7 +228,8 @@ article.article {
     box-sizing: border-box;
     flex: 1;
     height: auto;
-    background-size: cover;
+    background-size: contain;
+    background-color: #a3abb3;
     background-position: center;
     background-repeat: no-repeat; }
     article.article .cover > img {

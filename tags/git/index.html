@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>
     
-      tags
+      WHITE
     
   </title>
   
@@ -102,40 +102,59 @@
     <div class="container">
       <main>
         
-          <div id="tag-cloud">
-            <input type="text" placeholder="Input And Enter To Search">
-            <div class="wrapper">
-              <a href="/tags/git/" style="font-size: 1rem;">git</a> <a href="/tags/hexo/" style="font-size: 1rem;">hexo</a> <a href="/tags/travis/" style="font-size: 1rem;">travis</a>
-            </div>
-          </div>
-          <script>
-            const tagCloudInput = document.querySelector("#tag-cloud input");
-            const tagList = document.querySelectorAll("#tag-cloud a");
+          
 
-            tagCloudInput.addEventListener("keydown", event => {
-              if (event.code == "Enter") {
-
-                let searchValue = tagCloudInput.value.trim();
-
-                if (searchValue == '') {
-                  tagList.forEach(tag => {
-                    tag.style.display = 'block';
-                  });
-
-                  return;
-                }
-
-                tagList.forEach(tag => {
-                  if (tag.text.toLowerCase().indexOf(searchValue.toLowerCase()) > -1) {
-                    tag.style.display = 'block';
-                  } else {
-                    tag.style.display = 'none';
-                  }
-                });
-              }
-            });
-          </script>
+<article class="article">
+  <div class="cover left-item" style="background-image:url(https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20190208124605.png);">
+    <img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20190208124605.png">
+  </div>
+  <div class="content right-item">
+    <div class="wrapper">
+      <time>FEBRUARY 4, 2019</time>
+      <h2 class="title">
+        <a href="/2019/02/04/deploy-hexo-blog-with-travis/">使用 Travis 部署 Hexo 博客</a>
+      </h2>
+      <div class="description">
+        相信很多人都有自己的静态博客，但是部署方式可能不是采用自动化部署的方式。像我之前就是通过手动编译和部署的方式来部署我的博客到VPS上，Travis 是一款免费的自动化部署工具，接下来我将介绍如何用 Travis 来部署静态博客。因为我的电脑是 macOS 操作系统，所以博文中的操作都是基本 macOS 操作系统的，Windows 操作系统上不一定适用
+      </div>
+      <ul class="tags">
         
+          
+            <li><a href="/tags/travis/">#travis</a></li>
+          
+        
+          
+            <li><a class="active" href="/tags/git/">#git</a></li>
+          
+        
+          
+            <li><a href="/tags/hexo/">#hexo</a></li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</article>
+
+        
+        
+        
+        <ul class="paginate">
+  <li>
+    <a href="javascript:void(0)"><i class="fas fa-arrow-left"></i>&nbsp;PREV</a>
+  </li>
+  
+    <li>1 / 1</li>
+  
+  <li>
+    <a href="javascript:void(0)">NEXT&nbsp;<i class="fas fa-arrow-right"></i></a>
+  </li>
+</ul>
+
+        <div class="back-to-top">
+  <button><i class="fas fa-angle-up"></i>TOP</button>
+</div>
+
       </main>
     </div>
   </body>
