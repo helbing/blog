@@ -1,12 +1,12 @@
 ---
 title: 使用 Travis 部署 Hexo 博客
-description: 相信很多人都有自己的静态博客，但是部署方式可能不是采用自动化部署的方式。像我之前就是通过手动编译和部署的方式来部署我的博客到VPS上，Travis 是一款免费的自动化部署工具，接下来我将介绍如何用 Travis 来部署静态博客。因为我的电脑是 macOS 操作系统，所以博文中的操作都是基本 macOS 操作系统的，Windows 操作系统上不一定适用
-cover: https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20190208124605.png
+description: 相信很多人都有自己的静态博客，但是部署方式可能不是采用自动化部署的方式。像我之前就是通过手动编译和部署的方式来部署我的博客到VPS上，Travis 是一款免费的自动化部署工具，接下来我将介绍如何用 Travis 来部署静态博客
+cover: https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20190208165724.png
 date: 2019-02-04
 tag: ["travis", "git", "hexo"]
 ---
 
-首先我是默认看这篇博文的你是已经有自己的静态博客了，只是还缺少一套可以自动化部署博客的手段
+首先我是默认看这篇博文的你是已经有自己的静态博客了，只是还缺少一套可以自动化部署博客的手段。因为我的电脑是 macOS 操作系统，所以博文中的操作都是基本 macOS 操作系统的，Windows 操作系统上不一定适用
 
 ## 注册登录 Travis
 
