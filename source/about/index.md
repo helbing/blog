@@ -14,4 +14,4 @@ avatar: https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20190208173329
 2. Go
 3. Java
 4. Python
-5. Front End (Basic, Vue.js, )
+5. Front End (Basic, Vue.js, Typescirpt, etc)
