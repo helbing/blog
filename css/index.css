@@ -226,10 +226,9 @@ article.article {
     order: 1; }
   article.article .cover {
     box-sizing: border-box;
-    flex: 1;
+    flex: 2;
     height: auto;
-    background-size: contain;
-    background-color: #a3abb3;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat; }
     article.article .cover > img {
@@ -530,10 +529,10 @@ aside#search {
   aside#search > .wrapper {
     width: 720px; }
   article.article {
-    display: flex;
+    display: block;
     margin-bottom: 6.25rem; }
     article.article .cover > img {
-      display: none; } }
+      display: block; } }
 
 @media (min-width: 992px) {
   body,
@@ -545,10 +544,10 @@ aside#search {
   aside#search > .wrapper {
     width: 840px; }
   article.article {
-    display: flex;
+    display: block;
     margin-bottom: 6.25rem; }
     article.article .cover > img {
-      display: none; } }
+      display: block; } }
 
 @media (min-width: 1200px) {
   body,
