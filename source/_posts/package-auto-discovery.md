@@ -2,7 +2,7 @@
 title: 深入了解 Laravel 5.5 包自动发现
 description: laravel5.5 开始提供了一个新特性，包自动发现 Package Auto Discuvery，包自动发现主要用于自动发现第三方包的 ServiceProvider 和 Facade 并进行注册
 cover: https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20190211132629.png
-date: 2019-11-03
+date: 2018-11-03
 tag: ["php", "laravel"]
 ---
 
