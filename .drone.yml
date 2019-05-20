@@ -1,0 +1,22 @@
+kind: pipeline
+
+steps:
+- name: hexo build
+  image: node
+  commands:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH="$HOME/.yarn/bin:$PATH"
+  - yarn install
+  - yarn global add hexo-cli
+  - hexo clean
+  - hexo generate
+
+- name: publish gh-page
+  image: plugins/gh-pages
+  settings:
+    target_branch: gh-pages
+    pages_directory: public/
+    username:
+      from_secret: github_username
+    password:
+      from_secret: github_password
