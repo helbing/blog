@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.59.0-DEV with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="helbing">
+<meta name="keywords" content="">
+<meta name="description" content="gitbook 就是一个电子书编写工具，它会将你编写的 markdown 文章编译转成本电子书">
+
+
+<meta property="og:description" content="gitbook 就是一个电子书编写工具，它会将你编写的 markdown 文章编译转成本电子书">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gitbook 极简教程">
+<meta name="twitter:title" content="Gitbook 极简教程">
+<meta property="og:url" content="https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/">
+<meta property="twitter:url" content="https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/">
+<meta property="og:site_name" content="">
+<meta property="og:description" content="gitbook 就是一个电子书编写工具，它会将你编写的 markdown 文章编译转成本电子书">
+<meta name="twitter:description" content="gitbook 就是一个电子书编写工具，它会将你编写的 markdown 文章编译转成本电子书">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2019-07-23T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-07-23T00:00:00">
+  
+  
+  
+  
+    
+      <meta property="article:tag" content="tool">
+    
+      <meta property="article:tag" content="gitbook">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/84922eb67672cf1e41f02b4f75502f16?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/84922eb67672cf1e41f02b4f75502f16?s=640">
+
+
+    <title>Gitbook 极简教程</title>
+
+    <link rel="icon" href="https://blog.helbing.cn/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://blog.helbing.cn/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://blog.helbing.cn/"></a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://blog.helbing.cn/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/84922eb67672cf1e41f02b4f75502f16?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://blog.helbing.cn/#about">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/84922eb67672cf1e41f02b4f75502f16?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">helbing</h4>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.helbing.cn/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.helbing.cn/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.helbing.cn/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.helbing.cn/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/helbing" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.helbing.cn/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Gitbook 极简教程
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-07-23T00:00:00Z">
+        
+  
+  
+  
+  
+    23 July 2019
+  
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>gitbook 就是一个电子书编写工具，它会将你编写的 markdown 文章编译转成本电子书</p>
+
+<h2 id="安装">安装</h2>
+
+<pre><code class="language-shell">yarn global add gitbook-cli
+</code></pre>
+
+<h2 id="快速入门">快速入门</h2>
+
+<p>首先通过下面命令初始化一个 gitbook 项目</p>
+
+<pre><code class="language-shell">cd /path/to
+mkdir book-name &amp;&amp; cd book-name
+gitbook init
+</code></pre>
+
+<p>初始化完成后会生成两个文件，分别是 <code>README.md</code> 和 <code>SUMMARY.md</code>。一个是说明文件，一个是目录文件</p>
+
+<p>之后我们只需要编写 <code>SUMMARY.md</code> 来确立目录结构就行了，如</p>
+
+<pre><code class="language-markdown"># Summary
+
+-   [Introduction](README.md)
+
+# Chapter 1
+
+-   [lesson 1](Chapter1/1.md)
+-   [lesson 1](Chapter1/2.md)
+</code></pre>
+
+<p>对应的目录结构如下</p>
+
+<pre><code>|- Introduction
+|-|- README.md
+|- Chapter 1
+|-|- 1.md
+|-|- 2.md
+</code></pre>
+
+<p>接下来执行 <code>gitbook serve</code> 就可以预览 gitbook 了</p>
+
+<h2 id="book-json">book.json</h2>
+
+<pre><code class="language-json">{
+    &quot;title&quot;: &quot;kubernetes 极简教程&quot;,
+    &quot;plugins&quot;: [&quot;katex&quot;]
+}
+</code></pre>
+
+<p>这里只介绍常用的，不常用的可以看这里 <a href="https://gitbookio.gitbooks.io/documentation/format/configuration.html">https://gitbookio.gitbooks.io/documentation/format/configuration.html</a></p>
+
+<h2 id="插件推荐">插件推荐</h2>
+
+<p>你可以在 <a href="https://www.npmjs.com/">https://www.npmjs.com/</a> 上找有哪些 gitbook 插件，通过关键词 <code>gitbook-plugin-</code> 就能找到 gitbook 插件。这里会推荐一些比较好用的插件</p>
+
+<ol>
+<li><a href="https://www.npmjs.com/package/gitbook-plugin-katex">katex</a></li>
+<li><a href="https://www.npmjs.com/package/gitbook-plugin-github">github</a></li>
+<li><a href="https://www.npmjs.com/package/gitbook-plugin-search-plus">search-plus</a></li>
+<li><a href="https://www.npmjs.com/package/gitbook-plugin-copy-code-button">copy-code-button)</a></li>
+</ol>
+
+<h2 id="隐藏左下角的-published-with-gitbook">隐藏左下角的 Published with Gitbook</h2>
+
+<p>创建样式表文件 <code>styles/website.css</code></p>
+
+<pre><code class="language-css">.gitbook-link {
+    display: none !important;
+}
+</code></pre>
+
+<p>编辑 <code>book.json</code> 文件</p>
+
+<pre><code class="language-json">{
+    &quot;styles&quot;: {
+        &quot;website&quot;: &quot;styles/website.css&quot;
+    }
+}
+</code></pre>
+
+<h2 id="参考资料">参考资料</h2>
+
+<ul>
+<li><a href="http://gitbook.hushuang.me/">http://gitbook.hushuang.me/</a></li>
+<li><a href="http://gitbook.zhangjikai.com/plugins.html">http://gitbook.zhangjikai.com/plugins.html</a></li>
+</ul>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://blog.helbing.cn/tags/tool/">tool</a>
+
+  <a class="tag tag--primary tag--small" href="https://blog.helbing.cn/tags/gitbook/">gitbook</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2/" data-tooltip="操作系统历史">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 helbing. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2/" data-tooltip="操作系统历史">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fblog.helbing.cn%2F2019%2F07%2Fgitbook-%25E6%259E%2581%25E7%25AE%2580%25E6%2595%2599%25E7%25A8%258B%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/84922eb67672cf1e41f02b4f75502f16?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">helbing</h4>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Software Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://blog.helbing.cn/images/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://blog.helbing.cn/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/blog.helbing.cn\/2019\/07\/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B\/';
+          
+            this.page.identifier = '\/2019\/07\/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'blog-helbing-cn';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
