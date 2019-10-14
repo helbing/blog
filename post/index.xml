@@ -6,10 +6,19 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 12 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://blog.helbing.cn/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>进程与线程</title>
+      <link>https://blog.helbing.cn/2019/10/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Sat, 12 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.helbing.cn/2019/10/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>操作系统历史</title>

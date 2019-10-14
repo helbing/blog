@@ -13,20 +13,20 @@
 
 <meta property="og:description" content="">
 <meta property="og:type" content="article">
-<meta property="og:title" content="操作系统历史">
-<meta name="twitter:title" content="操作系统历史">
-<meta property="og:url" content="https://blog.helbing.cn/2019/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2/">
-<meta property="twitter:url" content="https://blog.helbing.cn/2019/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2/">
+<meta property="og:title" content="进程与线程">
+<meta name="twitter:title" content="进程与线程">
+<meta property="og:url" content="https://blog.helbing.cn/2019/10/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/">
+<meta property="twitter:url" content="https://blog.helbing.cn/2019/10/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/">
 <meta property="og:site_name" content="">
 <meta property="og:description" content="">
 <meta name="twitter:description" content="">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2019-10-11T00:00:00">
+    <meta property="article:published_time" content="2019-10-12T00:00:00">
   
   
-    <meta property="article:modified_time" content="2019-10-11T00:00:00">
+    <meta property="article:modified_time" content="2019-10-12T00:00:00">
   
   
   
@@ -53,14 +53,14 @@
   <meta property="twitter:image" content="https://www.gravatar.com/avatar/84922eb67672cf1e41f02b4f75502f16?s=640">
 
 
-    <title>操作系统历史</title>
+    <title>进程与线程</title>
 
     <link rel="icon" href="https://blog.helbing.cn/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://blog.helbing.cn/2019/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2/">
+    <link rel="canonical" href="https://blog.helbing.cn/2019/10/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -198,19 +198,19 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      操作系统历史
+      进程与线程
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2019-10-11T00:00:00Z">
+      <time itemprop="datePublished" datetime="2019-10-12T00:00:00Z">
         
   
   
   
   
-    11 October 2019
+    12 October 2019
   
 
       </time>
@@ -222,80 +222,114 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <h2 id="第一代-1945-1955-真空管和穿孔卡片">第一代（1945-1955）：真空管和穿孔卡片</h2>
+              <h2 id="进程">进程</h2>
 
-<p>在计算机的早期，是没有操作系统的，人们是通过穿孔卡片的方式来操作计算机，而且计算机主要使用的是真空管，非常容易烧毁</p>
+<p>进程是操作系统资源管理的最小单位，CPU 每个时刻只会执行一个进程。在 Unix/Linux 系统中你可以通过 ps 命令查看当前系统中的进程</p>
 
-<h2 id="第二代-1955-1965-晶体管和批处理系统">第二代（1955-1965）：晶体管和批处理系统</h2>
+<p>在多道分时操作系统中，将 CPU 运行时间划分为多个时间片，每个进程只能执行一个时间片时间，然后重新进入<code>进程就绪态队列</code>排队，等待下一个执行。在1秒内，CPU 会执行多个进程，从而使得每个进程看起来像是并行执行的，也就是伪并行。上述的情况是单核 CPU，如果是多核 CPU 确实是能做到并行，但不是真正意义上的并行，因为还是做不到一个进程都有一个 CPU 在执行（毕竟 CPU 数量有限），每个进程依旧是只能执行一个时间片时间</p>
 
-<p>随着晶体管的发展，计算机已经比较可靠了，不用在担心烧毁的问题，计算机已经可以长时间运行。但计算机依旧非常昂贵，只有少数大公司，政府部门或者大学才能出得起几百万美金购买，而且这时候的计算机非常大，一般锁在有空调的房间里，称作大型机</p>
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191012154847.png" alt="" /></p>
 
-<p>然而此时操作计算机依旧很麻烦，因为每次只能执行一个程序，非常浪费时间。这也就催生了批处理系统的出现。当然也有磁带的功劳，因为能储存更多的数据和更加轻量，相比于穿孔卡片</p>
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191012154906.png" alt="" /></p>
 
-<p>需要补充的是这时候已经有编程语言了，比如 FORTRAN 语言和汇编语言等等。然而大型机根本不识别，还是得通过穿孔卡片。所以假设你使用 FORTRAN 语言编程的话，得先使用打孔机把代码和数据变成穿孔卡片，如下所示</p>
+<p>进程的三种状态</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191011113345.png" alt="" /></p>
+<ol>
+<li>运行态（该时刻进程实际占用 CPU）</li>
+<li>就绪态（可运行，但其他进程占用着 CPU）</li>
+<li>阻塞态（除非某种外部事件发生，否则进程不能运行，比如进程等待用户输入）</li>
+</ol>
 
-<p>生成的穿孔卡片长这样</p>
+<p>也可以说进程还有一个状态，终止态。进程终止的几种情况</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191011113554.png" alt="" /></p>
+<ol>
+<li>正常退出（自愿的，进程执行完成）</li>
+<li>出错退出（自愿的，比如代码层面检测到错误然后结束进程）</li>
+<li>严重错误（非自愿）</li>
+<li>被其他进程杀死（非自愿）</li>
+</ol>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191011113616.png" alt="" /></p>
+<p>在 Unix/Linux 操作系统中，通过系统调用 <code>fork</code> 来创建新进程。fork 会创建一个与调用进程相同的副本。也就是说这两个进程（父进程和子进程）拥有相同的内存映像，同样的环境字符串和同样的打开文件等等，只是进程 ID 不同。通常，子进程会接着执行 <code>execve</code> 系统调用或类似的系统调用，以修改其内存映像并运行一个新的进程。之所以要安排两步建立进程，是为了在 fork 之后但在 execve 之前允许该子进程处理其文件描述符，这样可以完成对标准输入文件，标准输出文件和标准错误文件的重定向</p>
 
-<p>讲回批处理系统，程序员会把穿孔卡片送到输入室，在收集了大约一个小时的 job（理解为一个程序） 之后，这些穿孔卡片会通过 IBM 1401 大型机写入到磁带中。随后，操作员会在 IBM 7094 大型机（相比于 1401 来说性能好计算能力强）中装入一个特殊程序（现代操作系统前身，比如 FMS，FORTRAN Monitor System），操作系统会从送过来的磁带中读入 job 并执行，所有 job 的执行结果会写入到另外一盘磁带上，然后在通过 1401 将结果脱机（不与计算机联机）打印出来（这不是很麻烦吗？主要是 7094 性能比较好，而且非常贵，所以就把它主要用于计算）</p>
+<pre><code class="language-c">#include &lt;unistd.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;pthread.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191011113700.png" alt="" /></p>
+int main(int argc, char const *argv[])
+{
+    pid_t pid = fork();
+    if (pid &lt; 0) {
+        // 错误信息在 errno 中
+        printf(&quot;error in fork!\n&quot;);
+    } else if (pid == 0) {
+        // pid 为 0 说明当前进程是子进程
+        printf(&quot;child process\n&quot;);
+        // 调用命令的末尾一定要带一个空指针 NULL
+        char * argv[] = {&quot;ls&quot;, &quot;-al&quot;, &quot;/etc/passwd&quot;, NULL};
+        execv(&quot;/bin/ls&quot;, argv);
+    } else {
+        // pid 大于 0 说明当前进程是父进程，pid 的值为 fork 生成的子进程 ID
+        printf(&quot;parent process\n&quot;);
+    }
+    return 0;
+}
+// parent process
+// child process
+// -rw-r--r--  1 root  wheel  6946  8 25 06:20 /etc/passwd
+</code></pre>
 
-<p>一个典型的 job 如上所示，$JOB 标识了所需的运行时间（分钟），计费账号和程序员名称。$FORTRAN 告诉操作系统从系统磁带中装入 FORTRAN 语言编译器，后面就是 FORTRAN 代码。$LOAD 表示通知操作系统装入编译好的目标程序。$RUN 告诉操作系统执行程序和加载 $END 之前的数据。$END 表示 job 结束</p>
+<p>对于上面 fork/execve 的例子，你可能会奇怪怎么 parent process 和 child process 都输出了。前面讲过，父进程调用 fork 生成的子进程拥有和自己相同的副本，也就是说也拥有相同的代码副本。那么父进程和子进程都会执行 fork 之后的代码，只是它们的 pid （进程 ID）不同</p>
 
-<p>可以看下面的视频了解下 IBM 1401 大型机</p>
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191012181902.png" alt="" /></p>
+
+<p>顺便解释下 execve，execve 的作用是运行另外一个指定的程序。它会把新程序加载到当前进程的内存空间内，当前的进程会被丢弃，它的堆，栈和所有的段数据都会被新进程相应的部分代替，然后会从新程序的初始化代码和 main 函数开始运行。同时，进程的 ID 将保持不变</p>
+
+<p>在 Unix/Linux 程序开发中，fork 子进程后，一般都会 execve 系统调用。出于效率考虑，操作系统引入了<code>写时复制</code>（COW，Copy On Write），fork 子进程后，实际子进程和父进程还是使用相同的物理空间的，只是虚拟空间不同，只有当进程空间的各段内容要发生改变时，才会将父进程的内容拷贝一份给子进程。设想下在没有写时复制前，fork 子进程就开辟新的内存空间给子进程，然后将父进程的资源完全拷贝一份到子进程内存空间，这时候如果执行 execve，那之前的拷贝就完全没意义了</p>
+
+<p>前面讲过 CPU 会每个时刻只会执行一个进程，当前时间片执行完，就换下一个进程执行。所以操作系统会给每一个进程维护一个结构数组，称为 <code>PCB</code>（进程管理块，process control block）</p>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191013194253.png" alt="" /></p>
+
+<h2 id="线程">线程</h2>
+
+<p>在实际开发中，为了让程序并发执行，更大限度的利用 CPU，往往会 fork 多几个进程来执行，或者执行不同的任务，但是我们知道创建和调度进程开销是比较大的（维护 PCB），所以操作系统引入了<code>线程</code>（thread）的概念，线程可以直接理解为“轻量级进程”。线程概念的引入，将进程原有的两个职能（资源管理与执行）分开，进程负责资源管理，线程负责执行。同时为了方便调度，线程同样有一个线程表</p>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191014104858.png" alt="" /></p>
 
 <ul>
-<li><a href="https://www.bilibili.com/video/av24487822/">IBM 1401大型机运行FORTRAN II程序</a></li>
+<li>第一列给出了在一个进程中所有线程共享的内容，第一列表项是进程的属性，而不是线程的属性</li>
+<li>第二列给出了毎个线程自己的内容</li>
 </ul>
 
-<h2 id="第三代-1965-1980-集成电路和多道程序设计">第三代（1965-1980）：集成电路和多道程序设计</h2>
+<p>与进程一样，线程也有若干状态：运行态，阻塞态，就绪态或终止态</p>
 
-<p>这个时期由于集成电路（IC，Integrate Circuit）的发展，出现了首台使用了（小规模）集成电路的计算机，System/360。当时的操作系统非常多样，每家厂商不得不针对自己旗下的计算机而研发不同的操作系统。而 IBM 为了解决这个问题研发了 System/360 系列的计算机，尽管这些计算机在性能上有差距，但是它们有了统一的操作系统，OS/360，当然由于为了兼容也导致了 OS/360 的代码极其庞大而复杂（在研发 OS/360 过程中所遇到的问题在 <a href="https://zh.wikipedia.org/wiki/Fred_Brooks">Fred Brooks</a> 写的软件工程经典之作<a href="https://zh.wikipedia.org/wiki/%E4%BA%BA%E6%9C%88%E7%A5%9E%E8%AF%9D">《人月神话》</a>中详细地叙述了）</p>
+<p>线程实现的方式有很多种，既有软件层面的，也有硬件层面的（比如 SMP，CMP，CMT 等），甚至有的操作系统还不支持多线程。软件层面上，有基于用户空间实现和基于内核空间实现等</p>
 
-<p>System/360 相比于上一代计算机，引入了两项非常关键的技术，中断和通道</p>
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191014114707.png" alt="" /></p>
 
-<p>1）通道就是一种控制一台或多台外部设备的硬件机构，它一旦启动就独立与 CPU 运行，因而做到了输入输出与 CPU 并行工作（不是真正意义上的，因为 CPU 要想知道输入输出有没有完成，必须通过轮训请求）。操作员也就不再需要通过 1401 来进行输入输出和搬运磁带了</p>
+<p>这里我们主要着重介绍基于用户空间实现的线程，这也是 Unix/Linux 主要采用的这种方式</p>
 
-<p>2）中断技术就是在硬件设备输入输出完成时，或者硬件发生某种故障时等等情况，相应的硬件会向 CPU 发出信号，这时 CPU 立即停下手头的工作优先处理中断请求，中断请求处理完成后再继续原来的作业</p>
+<ol>
+<li>兼容性强，可以在不支持线程的操作系统上实现</li>
+<li>每个进程可以自己定制调度算法</li>
+<li>创建和销毁线程，线程切换代价等线程管理的代价比内核线程少得多</li>
+<li>线程能够利用的表空间和堆栈空间比内核级线程多</li>
+<li>同一进程中只能同时有一个线程在运行，如果有一个线程使用了系统调用而阻塞，那么整个进程都会被挂起</li>
+</ol>
 
-<p>通道和中断这两个技术的结合，使得 CPU 和输入输出设备真正实现了并行工作。此时，多道程序设计的概念才变为了现实。那么什么是多道程序设计呢？多道程序设计是指在内存同时放若干道程序，使它们在系统中并发执行，共享系统中的各种资源。当一道程序暂停执行时，CPU立即转去执行另一道程序</p>
+<p>为实现可移植的线程程序，IEEE 在 IEEE 标准 1003.1 c 中定义了线程的标准。它定义的线程包叫作 <code>pthread</code>。大部分 UNIX 系统都支持该标准</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191011115137.png" alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191014114756.png" alt="" /></p>
 
-<p>然而多道程序系统本质上还是批处理系统，和批处理系统一样，依旧需要漫长的等待，才能拿到程序结果。程序员希望能更快的得到响应，这也催生了分时系统（timesharing）的出现。它实际上是多道程序系统的一个变体，每个用户都有一个联机终端（那个时候，终端机器通过数据总线与中央机器连接，支持中断和数据并行传输）。分时系统就是将 CPU 的运行分为多个时间片，每个作业只执行一个时间片，然后重新进入调度队列，等待下一次调用</p>
-
-<ul>
-<li>第一代分时系统：单道分时系统。作业主要存放在外存中，内存中仅驻留一个作业，该作业运行一个时间片后，便被调出（即调至外存）再从外存调入下一个作业，同样运行一个时间片。依此类推。典型的代表是CTSS（Compatible Time Sharing System），由 MIT（麻省理工大学）开发</li>
-<li>第二代分时系统：多道分时系统。奠定了现代分时操作系统的基础。像是 Linux，Unix 系统等。典型的代表是 MULTICS（Multiplexed Information and Computing Service），由 MIT，通用电气和贝尔实验室联合开发，着眼于建造满足波士顿地区所有用户计算需求的机器。虽然最终在商业上失败了，但是它却带来了两个东西，一是贝尔实验室的 Ken Thompson 开发简化的单用户版 MULTICS，而他的工作促使了 Unix 操作系统的诞生。二是计算服务的概念在20世纪以云计算（cloud computing）的形式回归</li>
-</ul>
-
-<p>既然有分时操作系统，那么也有实时操作系统（RTOS）。实时操作系统广泛应用于金融，军工，航天等领域。如果你想了解下实时操作系统的话，可以玩玩单片机和 FreeRTOS</p>
-
-<h2 id="第四代-1980-年至今-个人计算机">第四代（1980 年至今）：个人计算机</h2>
-
-<p>随着 LSI（大规模集成电路）的发展，在每平方厘米的硅片芯片上可以集成数千个晶体管，个人计算机时代到来了</p>
-
-<p>1974 年，当 Intel 8080 第一代通用8位 CPU 出现时，Intel 希望有一个用于8080的操作系统，Gary Kildall 为它编写了一个基于磁盘的操作系统，CP/M（Control Program for Microcomputer）</p>
-
-<p>1977 年，Digital Research 重写了 CPM，使其可以在使用 8080，Zilog Z80 以及其他 CPU 芯片的多种微型计算机上运行，从而完全控制了微型计算机世界达 5 年之久</p>
-
-<p>在 20 世纪 80 年代，Bill Gates 取得了 IBM 公司的合约，收购了 DOS 操作系统，修改后推出了 MS-DOS 操作系统。同一时期 Steve Job 和他的朋友在看到 GUI 后（Doug Engelbart 发明了图形用户界面，包括窗口，图标，菜单以及鼠标等），受启发开发了带有图形界面的苹果计算机 Lisa，然而太贵导致商业上失败。第二次尝试推出了苹果 Macintosh，不仅比 Lisa 便宜的多，而且用户更友好</p>
-
-<p>受到了 Macintosh 的启发，微软在构建 MS-DOS 的后继产品时，开发了名为 Windows 的 GUI 操作系统，后续推出了 Windows 95，Windows 98，Windows NT，Windows 2000，Windows XP，Windows Vista，Windows 7，Windows 8，Windows 10 等一些我们熟悉和不熟悉的操作系统</p>
-
-<p>许多 UNIX 用户，特别是富有经验的程序员更偏好基于命令的界面而不是 GUI，但是几乎所有的 UNIX 系统都支持由 MIT 开发的称为 X Window 的视窗系统（如众所周知的 X11）。这个系统具有基本的视窗管理功能，允许用户通过鼠标创建，删除，移动和变比视窗。对于那些希望有图形系统的 UNIX 用户，通常在 X11 之上还提供一个完整的 GUI，如 Gnome 或 KDE</p>
-
-<h2 id="第五代-1990-年至今-移动计算机">第五代（1990 年至今）：移动计算机</h2>
-
-<p>第一台真正的手持电话出现在 20 世纪 70 年代，大约 2 斤重，绝对属于轻量级。它被人们爱称为“砖头”（想想大哥大）。虽然在电话设备上将通话和计算合二为一的想法在 20 世纪 70 年代就已经出现了，但第一台真正的智能手机直到 20 世纪 90 年代中期才出现。这部手机就是诺基亚发布的 N9000</p>
-
-<p>随着智能手机变得十分普及，各种操作系统之间的竟争也变得更加激烈，并且形势比个人电脑领域更加模糊不清。现如今谷歌公司的 Android 是最主流的操作系统，而苹果公司的 iOS 也牢牢占据次席，但这并不会是常态，想想曾今的霸主 Symbian 操作系统</p>
+<blockquote>
+<p>通过 pthread_self 得到当前的线程 id，类型为 pthread_t。但是需要注意的是 pthread_t 在 Linux 系统中是 unsigned long int，而在 macOS，FreeBSD 中是一个 struct</p>
+</blockquote>
               
             </div>
           </div>
@@ -320,7 +354,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/" data-tooltip="Gitbook 极简教程">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2/" data-tooltip="操作系统历史">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -328,7 +362,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/10/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" data-tooltip="进程与线程">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
@@ -346,7 +380,7 @@
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/10/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -394,7 +428,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/" data-tooltip="Gitbook 极简教程">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2/" data-tooltip="操作系统历史">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -402,7 +436,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/10/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" data-tooltip="进程与线程">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
@@ -420,7 +454,7 @@
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/10/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -450,7 +484,7 @@
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fblog.helbing.cn%2F2019%2F10%2F%25E6%2593%258D%25E4%25BD%259C%25E7%25B3%25BB%25E7%25BB%259F%25E5%258E%2586%25E5%258F%25B2%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fblog.helbing.cn%2F2019%2F10%2F%25E8%25BF%259B%25E7%25A8%258B%25E4%25B8%258E%25E7%25BA%25BF%25E7%25A8%258B%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
@@ -540,9 +574,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/blog.helbing.cn\/2019\/10\/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2\/';
+          this.page.url = 'https:\/\/blog.helbing.cn\/2019\/10\/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B\/';
           
-            this.page.identifier = '\/2019\/10\/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2\/'
+            this.page.identifier = '\/2019\/10\/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B\/'
           
         };
         (function() {
