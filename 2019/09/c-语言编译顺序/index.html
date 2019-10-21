@@ -13,28 +13,26 @@
 
 <meta property="og:description" content="">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Gitbook 极简教程">
-<meta name="twitter:title" content="Gitbook 极简教程">
-<meta property="og:url" content="https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/">
-<meta property="twitter:url" content="https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/">
+<meta property="og:title" content="C 语言编译顺序">
+<meta name="twitter:title" content="C 语言编译顺序">
+<meta property="og:url" content="https://blog.helbing.cn/2019/09/c-%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%A1%BA%E5%BA%8F/">
+<meta property="twitter:url" content="https://blog.helbing.cn/2019/09/c-%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%A1%BA%E5%BA%8F/">
 <meta property="og:site_name" content="">
 <meta property="og:description" content="">
 <meta name="twitter:description" content="">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2019-07-23T00:00:00">
+    <meta property="article:published_time" content="2019-09-23T00:00:00">
   
   
-    <meta property="article:modified_time" content="2019-07-23T00:00:00">
+    <meta property="article:modified_time" content="2019-09-23T00:00:00">
   
   
   
   
     
-      <meta property="article:tag" content="tool">
-    
-      <meta property="article:tag" content="gitbook">
+      <meta property="article:tag" content="c">
     
   
 
@@ -55,14 +53,14 @@
   <meta property="twitter:image" content="https://www.gravatar.com/avatar/84922eb67672cf1e41f02b4f75502f16?s=640">
 
 
-    <title>Gitbook 极简教程</title>
+    <title>C 语言编译顺序</title>
 
     <link rel="icon" href="https://blog.helbing.cn/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/">
+    <link rel="canonical" href="https://blog.helbing.cn/2019/09/c-%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%A1%BA%E5%BA%8F/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -200,19 +198,19 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Gitbook 极简教程
+      C 语言编译顺序
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2019-07-23T00:00:00Z">
+      <time itemprop="datePublished" datetime="2019-09-23T00:00:00Z">
         
   
   
   
   
-    23 July 2019
+    23 September 2019
   
 
       </time>
@@ -224,91 +222,44 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>gitbook 就是一个电子书编写工具，它会将你编写的 markdown 文章编译转成本电子书</p>
-
-<h2 id="安装">安装</h2>
-
-<pre><code class="language-shell">yarn global add gitbook-cli
-</code></pre>
-
-<h2 id="快速入门">快速入门</h2>
-
-<p>首先通过下面命令初始化一个 gitbook 项目</p>
-
-<pre><code class="language-shell">cd /path/to
-mkdir book-name &amp;&amp; cd book-name
-gitbook init
-</code></pre>
-
-<p>初始化完成后会生成两个文件，分别是 <code>README.md</code> 和 <code>SUMMARY.md</code>。一个是说明文件，一个是目录文件</p>
-
-<p>之后我们只需要编写 <code>SUMMARY.md</code> 来确立目录结构就行了，如</p>
-
-<pre><code class="language-markdown"># Summary
-
--   [Introduction](README.md)
-
-# Chapter 1
-
--   [lesson 1](Chapter1/1.md)
--   [lesson 1](Chapter1/2.md)
-</code></pre>
-
-<p>对应的目录结构如下</p>
-
-<pre><code>|- Introduction
-|-|- README.md
-|- Chapter 1
-|-|- 1.md
-|-|- 2.md
-</code></pre>
-
-<p>接下来执行 <code>gitbook serve</code> 就可以预览 gitbook 了</p>
-
-<h2 id="book-json">book.json</h2>
-
-<pre><code class="language-json">{
-    &quot;title&quot;: &quot;kubernetes 极简教程&quot;,
-    &quot;plugins&quot;: [&quot;katex&quot;]
-}
-</code></pre>
-
-<p>这里只介绍常用的，不常用的可以看这里 <a href="https://gitbookio.gitbooks.io/documentation/format/configuration.html">https://gitbookio.gitbooks.io/documentation/format/configuration.html</a></p>
-
-<h2 id="插件推荐">插件推荐</h2>
-
-<p>你可以在 <a href="https://www.npmjs.com/">https://www.npmjs.com/</a> 上找有哪些 gitbook 插件，通过关键词 <code>gitbook-plugin-</code> 就能找到 gitbook 插件。这里会推荐一些比较好用的插件</p>
-
-<ol>
-<li><a href="https://www.npmjs.com/package/gitbook-plugin-katex">katex</a></li>
-<li><a href="https://www.npmjs.com/package/gitbook-plugin-github">github</a></li>
-<li><a href="https://www.npmjs.com/package/gitbook-plugin-search-plus">search-plus</a></li>
-<li><a href="https://www.npmjs.com/package/gitbook-plugin-copy-code-button">copy-code-button)</a></li>
+              <ol>
+<li>预处理：宏定义展开，头文件展开，条件编译等，同时将代码中的注释删除，这里并不会检查语法</li>
+<li>编译：检查语法，将预处理后文件编译生成汇编文件</li>
+<li>汇编：将汇编文件生成目标文件(二进制文件)</li>
+<li>链接：C 语言写的程序是需要依赖各种库的，所以编译之后还需要把库链接到最终的可执行程序中去</li>
 </ol>
 
-<h2 id="隐藏左下角的-published-with-gitbook">隐藏左下角的 Published with Gitbook</h2>
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191021170828.png" alt="" /></p>
 
-<p>创建样式表文件 <code>styles/website.css</code></p>
+<h2 id="使用-clang-进行编译">使用 clang 进行编译</h2>
 
-<pre><code class="language-css">.gitbook-link {
-    display: none !important;
-}
+<ol>
+<li>预处理：clang -E main.c -o main.i</li>
+<li>编译：clang -S main.i -o main.s</li>
+<li>汇编：clang -c main.s -o main.o</li>
+<li>链接：clang main.o -o main</li>
+<li>一步编译：clang main.c -o main</li>
+</ol>
+
+<h2 id="查找程序所依赖的动态库">查找程序所依赖的动态库</h2>
+
+<pre><code class="language-shell"># Linux
+ldd main
+# macOS
+otool -L main
 </code></pre>
 
-<p>编辑 <code>book.json</code> 文件</p>
-
-<pre><code class="language-json">{
-    &quot;styles&quot;: {
-        &quot;website&quot;: &quot;styles/website.css&quot;
-    }
-}
-</code></pre>
-
-<h2 id="参考资料">参考资料</h2>
+<h2 id="其他-clang-参数">其他 clang 参数</h2>
 
 <ul>
-<li><a href="http://gitbook.hushuang.me/">http://gitbook.hushuang.me/</a></li>
-<li><a href="http://gitbook.zhangjikai.com/plugins.html">http://gitbook.zhangjikai.com/plugins.html</a></li>
+<li><code>-O</code> 优化选项，0-3，数字越大优化级别越高</li>
+<li><code>-g</code> 用于 gdb，lldb 调试，没这个参数无法进行调试</li>
+<li><code>-D</code> 指定宏编译，如 -D DEBUG</li>
+<li><code>-I</code> 追加头文件的检索路径（可以是绝对路径或相对路径） -I/usr/local/include</li>
+<li><code>-L</code> 指定库路径（可以是绝对路径或相对路径）</li>
+<li><code>-l</code> 指定库名，通常是 libxxx.so</li>
+<li><code>-Wall</code> 显示更多错误信息</li>
+<li><code>-lstdc++</code> 编译 c++ 代码</li>
 </ul>
               
             </div>
@@ -321,9 +272,7 @@ gitbook init
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://blog.helbing.cn/tags/tool/">tool</a>
-
-  <a class="tag tag--primary tag--small" href="https://blog.helbing.cn/tags/gitbook/">gitbook</a>
+  <a class="tag tag--primary tag--small" href="https://blog.helbing.cn/tags/c/">c</a>
 
                   </div>
                 
@@ -336,7 +285,7 @@ gitbook init
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/" data-tooltip="Gitbook 极简教程">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -344,7 +293,7 @@ gitbook init
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/09/c-%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%A1%BA%E5%BA%8F/" data-tooltip="C 语言编译顺序">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2/" data-tooltip="操作系统历史">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
@@ -362,7 +311,7 @@ gitbook init
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/09/c-%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%A1%BA%E5%BA%8F/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -410,7 +359,7 @@ gitbook init
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/" data-tooltip="Gitbook 极简教程">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -418,7 +367,7 @@ gitbook init
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/09/c-%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%A1%BA%E5%BA%8F/" data-tooltip="C 语言编译顺序">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2/" data-tooltip="操作系统历史">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
@@ -436,7 +385,7 @@ gitbook init
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/09/c-%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%A1%BA%E5%BA%8F/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -466,7 +415,7 @@ gitbook init
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fblog.helbing.cn%2F2019%2F07%2Fgitbook-%25E6%259E%2581%25E7%25AE%2580%25E6%2595%2599%25E7%25A8%258B%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fblog.helbing.cn%2F2019%2F09%2Fc-%25E8%25AF%25AD%25E8%25A8%2580%25E7%25BC%2596%25E8%25AF%2591%25E9%25A1%25BA%25E5%25BA%258F%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
@@ -556,9 +505,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/blog.helbing.cn\/2019\/07\/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B\/';
+          this.page.url = 'https:\/\/blog.helbing.cn\/2019\/09\/c-%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%A1%BA%E5%BA%8F\/';
           
-            this.page.identifier = '\/2019\/07\/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B\/'
+            this.page.identifier = '\/2019\/09\/c-%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%A1%BA%E5%BA%8F\/'
           
         };
         (function() {
