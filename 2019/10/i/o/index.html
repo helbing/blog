@@ -13,28 +13,26 @@
 
 <meta property="og:description" content="">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Gitbook 极简教程">
-<meta name="twitter:title" content="Gitbook 极简教程">
-<meta property="og:url" content="https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/">
-<meta property="twitter:url" content="https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/">
+<meta property="og:title" content="I/O">
+<meta name="twitter:title" content="I/O">
+<meta property="og:url" content="https://blog.helbing.cn/2019/10/i/o/">
+<meta property="twitter:url" content="https://blog.helbing.cn/2019/10/i/o/">
 <meta property="og:site_name" content="">
 <meta property="og:description" content="">
 <meta name="twitter:description" content="">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2019-07-23T00:00:00">
+    <meta property="article:published_time" content="2019-10-05T00:00:00">
   
   
-    <meta property="article:modified_time" content="2019-07-23T00:00:00">
+    <meta property="article:modified_time" content="2019-10-05T00:00:00">
   
   
   
   
     
-      <meta property="article:tag" content="tool">
-    
-      <meta property="article:tag" content="gitbook">
+      <meta property="article:tag" content="operate system">
     
   
 
@@ -55,14 +53,14 @@
   <meta property="twitter:image" content="https://www.gravatar.com/avatar/84922eb67672cf1e41f02b4f75502f16?s=640">
 
 
-    <title>Gitbook 极简教程</title>
+    <title>I/O</title>
 
     <link rel="icon" href="https://blog.helbing.cn/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/">
+    <link rel="canonical" href="https://blog.helbing.cn/2019/10/i/o/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -200,19 +198,19 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Gitbook 极简教程
+      I/O
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2019-07-23T00:00:00Z">
+      <time itemprop="datePublished" datetime="2019-10-05T00:00:00Z">
         
   
   
   
   
-    23 July 2019
+    5 October 2019
   
 
       </time>
@@ -224,92 +222,204 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>gitbook 就是一个电子书编写工具，它会将你编写的 markdown 文章编译转成本电子书</p>
+              <p>在 Linux 系统中一切皆可以看作是文件，文件可分为：普通文件，目录文件，链接文件和设备文件等。文件描述符（file descriptor）是内核为了高效管理已被打开的文件所创建的索引，索引是一个非负整数（&gt;=0），用于指代被打开的文件，所有执行 I/O操作的系统调用都通过文件描述符。可执行程序刚启动时，0是标准输入，1是标准输出，2是标准错误。如果此时去打开一个新文件，那么它的文件描述符就为3。POSIX 标准要求每次打开文件时（含 socket）必须使用<code>当前进程中最小可用的文件描述符号码</code>，因此，在网络通信过程中稍不注意就有可能造成串话</p>
 
-<h2 id="安装">安装</h2>
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191021173925.png" alt="" /></p>
 
-<pre><code class="language-shell">yarn global add gitbook-cli
-</code></pre>
+<h2 id="文件描述符的限制">文件描述符的限制</h2>
 
-<h2 id="快速入门">快速入门</h2>
+<p>在编写文件操作或者网络通信的软件时，有时候会遇到“Too many open files”的问题。这主要是因为文件描述符是系统的一个重要资源，虽然说系统内存有多少就可以打开多少的文件描述符，但是在实际实现中内核是会做相应的处理的，一般最大的文件打开数会是系统内存的10%（称为系统级限制），通过 <code>sysctl -a | grep fs.file-max</code> 可以查看（结果的单位是 KB）。与此同时，内核为了不让某一个进程消耗掉所有的文件资源，会对单个进程可以打开的文件资源做一个限制（称为用户级限制），默认为1024，使用 <code>ulimit -n</code> 命令可以查看</p>
 
-<p>首先通过下面命令初始化一个 gitbook 项目</p>
+<h2 id="文件描述符和文件的关系">文件描述符和文件的关系</h2>
 
-<pre><code class="language-shell">cd /path/to
-mkdir book-name &amp;&amp; cd book-name
-gitbook init
-</code></pre>
+<p>每一个文件描述符会与一个打开的文件相对应，同时，不同的文件描述符也可能会指向同一个文件。相同的文件也可以被不同进程打开，也可以在同一个进程中被多次打开。系统为每一个进程维护了一个<code>文件描述符表</code>（表的大小与上面说的用户级限制相关联），该表的值从0开始，所以在不同进程中你会看到相同的文件描述符，而且可能指向的是同一个文件</p>
 
-<p>初始化完成后会生成两个文件，分别是 <code>README.md</code> 和 <code>SUMMARY.md</code>。一个是说明文件，一个是目录文件</p>
+<h2 id="open-和-fopen">open 和 fopen</h2>
 
-<p>之后我们只需要编写 <code>SUMMARY.md</code> 来确立目录结构就行了，如</p>
+<p>这里不是要讲 open 和 fopen 这两个函数，而且要讲系统调用（提供了 open）和 C 标准库（提供了 fopen）的区别。当你使用 C 标准库的相关 I/O 调用时，会返回一个 FILE 结构体指针，我们讲过进程启动后默认会有3个文件描述符（0，1，2），同样默认也有3个 FILE 结构体指针对应到3个文件描述符，它们是 stdin，stdout 和 stderr</p>
 
-<pre><code class="language-markdown"># Summary
-
--   [Introduction](README.md)
-
-# Chapter 1
-
--   [lesson 1](Chapter1/1.md)
--   [lesson 1](Chapter1/2.md)
-</code></pre>
-
-<p>对应的目录结构如下</p>
-
-<pre><code>|- Introduction
-|-|- README.md
-|- Chapter 1
-|-|- 1.md
-|-|- 2.md
-</code></pre>
-
-<p>接下来执行 <code>gitbook serve</code> 就可以预览 gitbook 了</p>
-
-<h2 id="book-json">book.json</h2>
-
-<pre><code class="language-json">{
-    &quot;title&quot;: &quot;kubernetes 极简教程&quot;,
-    &quot;plugins&quot;: [&quot;katex&quot;]
-}
-</code></pre>
-
-<p>这里只介绍常用的，不常用的可以看这里 <a href="https://gitbookio.gitbooks.io/documentation/format/configuration.html">https://gitbookio.gitbooks.io/documentation/format/configuration.html</a></p>
-
-<h2 id="插件推荐">插件推荐</h2>
-
-<p>你可以在 <a href="https://www.npmjs.com/">https://www.npmjs.com/</a> 上找有哪些 gitbook 插件，通过关键词 <code>gitbook-plugin-</code> 就能找到 gitbook 插件。这里会推荐一些比较好用的插件</p>
+<p>fopen 是基于 open 实现的，当我们使用 fopen 打开文件时会返回 FILE 结构体指针，它包含了文件描述符，读写内容的游标和 buffer cache （一般大小为 8kb）等。当你使用 fopen 操作文件时，它不会直接将数据写入到对应文件中，而是暂缓在 buffer cache 中，只有下面3种情况才会将数据回写到对应的文件中</p>
 
 <ol>
-<li><a href="https://www.npmjs.com/package/gitbook-plugin-katex">katex</a></li>
-<li><a href="https://www.npmjs.com/package/gitbook-plugin-github">github</a></li>
-<li><a href="https://www.npmjs.com/package/gitbook-plugin-search-plus">search-plus</a></li>
-<li><a href="https://www.npmjs.com/package/gitbook-plugin-copy-code-button">copy-code-button)</a></li>
+<li>buffer cache 满了</li>
+<li>调用 fclose，释放了文件描述符和 buffer cache</li>
+<li>调用 fflush，手动释放了 buffer cache</li>
 </ol>
 
-<h2 id="隐藏左下角的-published-with-gitbook">隐藏左下角的 Published with Gitbook</h2>
+<p>通过下面这个例子了解 open 和 fopen</p>
 
-<p>创建样式表文件 <code>styles/website.css</code></p>
+<pre><code class="language-c">#include &lt;unistd.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;pthread.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
 
-<pre><code class="language-css">.gitbook-link {
-    display: none !important;
+int main(int argc, char const *argv[])
+{
+    // 关闭了标准输出流 1
+    close(STDOUT_FILENO); 
+    // 通过系统调用打开一个文件，由于之前关闭了标准输出流，所以现在当前进程中最小可用的文件描述符就是1
+    int fd = open(&quot;1.log&quot;, O_CREAT|O_TRUNC|O_WRONLY, 0644);
+    // printf 底层是实现是 fwrite，往 stdout 写数据
+    printf(&quot;hello world\n&quot;); 
+    // 手动释放 FILE 结构体指针 stdout 的 buffer cache
+    // 你可以试试有没有这行代码会有什么区别，看 1.log
+    fflush(stdout); 
+    // 只是释放文件描述符
+    close(fd);
+
+    return 0;
 }
 </code></pre>
 
-<p>编辑 <code>book.json</code> 文件</p>
+<p>这一行的代码 <code>O_CREAT|O_TRUNC|O_WRONLY</code> 需要说明下，open 的第二个参数是一个 int 类型（32位）</p>
 
-<pre><code class="language-json">{
-    &quot;styles&quot;: {
-        &quot;website&quot;: &quot;styles/website.css&quot;
-    }
-}
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191021175302.png" alt="" /></p>
+
+<p>前三位 O_RDONLY，O_WRONLY，O_RDWR 是必选项且只能选一个，其他为可选项，通过 | （或操作）置为1</p>
+
+<h2 id="常用系统-i-o-调用">常用系统 I/O 调用</h2>
+
+<h3 id="打开文件-open">打开文件 open</h3>
+
+<pre><code class="language-c">int open(const char * pathname, int flags, mode_t mode);
 </code></pre>
 
-<h2 id="参考资料">参考资料</h2>
+<p>一些常用的 flag 如下</p>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191022101924.png" alt="" /></p>
+
+<h3 id="关闭文件描述符-close">关闭文件描述符 close</h3>
+
+<pre><code class="language-c">int close(int fd)
+</code></pre>
+
+<p>如果失败的话，返回-1，失败原因会写在 errno 中</p>
+
+<h3 id="读内容-read">读内容 read</h3>
+
+<pre><code class="language-c">ssize_t read(int fd, void* buf, unsigned int size)
+</code></pre>
 
 <ul>
-<li><a href="http://gitbook.hushuang.me/">http://gitbook.hushuang.me/</a></li>
-<li><a href="http://gitbook.zhangjikai.com/plugins.html">http://gitbook.zhangjikai.com/plugins.html</a></li>
+<li>fd 文件描述符</li>
+<li>buf 缓冲区对象，也就是读取时候的数据就是存在这个对象中</li>
+<li>size 缓冲区大小，也就是说要读取多大的数据</li>
 </ul>
+
+<p>函数返回值是实际读取的数据大小。如果失败返回 -1，失败原因会写在 errno 中</p>
+
+<h3 id="写内容-write">写内容 write</h3>
+
+<pre><code class="language-c">ssize_t write(int fd, const void* buf, unsigned int size)
+</code></pre>
+
+<ul>
+<li>fd 文件描述符</li>
+<li>buf 缓冲区对象，也就是保存数据的对象</li>
+<li>size 要写多少字节大小的数据</li>
+</ul>
+
+<p>函数返回值是实际写入的数据大小，如果失败返回 -1，失败原因会写在 errno 中</p>
+
+<h3 id="修改游标-移动文件读写位置-lseek">修改游标(移动文件读写位置) lseek</h3>
+
+<pre><code class="language-c">__msvcrt_long lseek(int fd, long off, int where)
+</code></pre>
+
+<ul>
+<li>fd 文件描述符</li>
+<li>off 设置游标的偏移量</li>
+<li>where 从哪里开始偏移，有三个宏定义可以用
+
+<ul>
+<li>SEEK_SET 开始位置</li>
+<li>SEEK_CUR 当前位置</li>
+<li>SEEK_END 结尾位置</li>
+</ul></li>
+</ul>
+
+<p>函数返回值为返回当前位置到开始位置到长度，如果失败返回 -1，失败原因会写在 errno 中</p>
+
+<h2 id="常用-c-标准库-i-o-调用">常用 C 标准库 I/O 调用</h2>
+
+<h3 id="打开文件-fopen">打开文件 fopen</h3>
+
+<pre><code class="language-c">FILE * fopen(const char * path, const char * mode);
+</code></pre>
+
+<ul>
+<li>path 文件路径</li>
+<li>mode 文件打开方式</li>
+</ul>
+
+<p>常用 mode</p>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191022102726.png" alt="" /></p>
+
+<p>函数返回值为 FILE 指针，如果失败返回 NULL，失败原因会写在 errno 中</p>
+
+<h3 id="关闭文件-fclose">关闭文件 fclose</h3>
+
+<pre><code class="language-c">int fclose(FILE *);
+</code></pre>
+
+<p>函数返回值为0则表示成功，如果失败返回 EOF，失败原因会写在 errno 中</p>
+
+<h3 id="读内容-fread">读内容 fread</h3>
+
+<pre><code class="language-c">size_t fread(void *buffer, size_t size, size_t count, FILE *);
+</code></pre>
+
+<ul>
+<li>buffer 接收数据的地址</li>
+<li>size 要读取的字节数，单位字节</li>
+<li>count 要读取多少个 size</li>
+</ul>
+
+<p>函数返回实际读取的单元个数。如果小于 count，则可能文件结束或读取出错。可以用 ferror 检测是否读取出错，用 feof 函数检测是否到达文件结尾。如果 size 或 count 为0，则返回0</p>
+
+<p>你可能会好奇为啥要分 size 和 count 呢？怎么不弄成一个参数传入 size * count 就可以了。其实这种实现方式主要还是从调用者方便考虑的，比如说，你要读写一个 struct 数组，通过返回值，你就能实际知道读写成功多少个 struct，虽然感觉也没方便多少。如果你考虑的是数据是否完全读写成功的话，那么其实也就不用纠结这两个参数的联系了</p>
+
+<h3 id="写内容-fwrite">写内容 fwrite</h3>
+
+<pre><code class="language-c">size_t fwrite(void * buffer, size_t size, size_t count, FILE *);
+</code></pre>
+
+<ul>
+<li>buffer 数据的地址</li>
+<li>size 要写入的字节数，单位字节</li>
+<li>count 要写入多少个 size</li>
+</ul>
+
+<p>函数返回实际读取的单元个数。如果小于 count，则说明发生了错误，文件流错误标志位将被设置，随后可以通过 ferror 函数判断</p>
+
+<h3 id="修改游标-移动文件读写位置-fseek">修改游标(移动文件读写位置) fseek</h3>
+
+<pre><code class="language-c">int fseek(FILE *, long off, int where)
+</code></pre>
+
+<ul>
+<li>off 设置游标的偏移量</li>
+<li>where 从哪里开始偏移，有三个宏定义可以用
+
+<ul>
+<li>SEEK_SET 开始位置</li>
+<li>SEEK_CUR 当前位置</li>
+<li>SEEK_END 结尾位置</li>
+</ul></li>
+</ul>
+
+<h3 id="清空文件缓冲区-fflush">清空文件缓冲区 fflush</h3>
+
+<pre><code class="language-c">int fflush(FILE *)
+</code></pre>
+
+<p>函数成功返回0，失败返回 EOF，错误代码存于 errno 中</p>
               
             </div>
           </div>
@@ -321,9 +431,7 @@ gitbook init
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://blog.helbing.cn/tags/tool/">tool</a>
-
-  <a class="tag tag--primary tag--small" href="https://blog.helbing.cn/tags/gitbook/">gitbook</a>
+  <a class="tag tag--primary tag--small" href="https://blog.helbing.cn/tags/operate-system/">operate system</a>
 
                   </div>
                 
@@ -336,7 +444,7 @@ gitbook init
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/09/c-%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%A1%BA%E5%BA%8F/" data-tooltip="C 语言编译顺序">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -344,7 +452,7 @@ gitbook init
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/09/c-%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%A1%BA%E5%BA%8F/" data-tooltip="C 语言编译顺序">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2/" data-tooltip="操作系统历史">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
@@ -362,7 +470,7 @@ gitbook init
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/10/i/o/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -410,7 +518,7 @@ gitbook init
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/09/c-%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%A1%BA%E5%BA%8F/" data-tooltip="C 语言编译顺序">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -418,7 +526,7 @@ gitbook init
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/09/c-%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%A1%BA%E5%BA%8F/" data-tooltip="C 语言编译顺序">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2/" data-tooltip="操作系统历史">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
@@ -436,7 +544,7 @@ gitbook init
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/07/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/10/i/o/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -466,7 +574,7 @@ gitbook init
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fblog.helbing.cn%2F2019%2F07%2Fgitbook-%25E6%259E%2581%25E7%25AE%2580%25E6%2595%2599%25E7%25A8%258B%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fblog.helbing.cn%2F2019%2F10%2Fi%2Fo%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
@@ -556,9 +664,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/blog.helbing.cn\/2019\/07\/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B\/';
+          this.page.url = 'https:\/\/blog.helbing.cn\/2019\/10\/i\/o\/';
           
-            this.page.identifier = '\/2019\/07\/gitbook-%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B\/'
+            this.page.identifier = '\/2019\/10\/i\/o\/'
           
         };
         (function() {
