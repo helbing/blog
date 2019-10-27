@@ -6,10 +6,19 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 15 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 24 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://blog.helbing.cn/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>内存管理</title>
+      <link>https://blog.helbing.cn/2019/10/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Thu, 24 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.helbing.cn/2019/10/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>文件系统</title>

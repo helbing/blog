@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.60.0-DEV with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="helbing">
+<meta name="keywords" content="">
+<meta name="description" content="">
+
+
+<meta property="og:description" content="">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内存管理">
+<meta name="twitter:title" content="内存管理">
+<meta property="og:url" content="https://blog.helbing.cn/2019/10/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">
+<meta property="twitter:url" content="https://blog.helbing.cn/2019/10/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">
+<meta property="og:site_name" content="">
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2019-10-24T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-10-24T00:00:00">
+  
+  
+  
+  
+    
+      <meta property="article:tag" content="operate system">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/84922eb67672cf1e41f02b4f75502f16?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/84922eb67672cf1e41f02b4f75502f16?s=640">
+
+
+    <title>内存管理</title>
+
+    <link rel="icon" href="https://blog.helbing.cn/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://blog.helbing.cn/2019/10/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://blog.helbing.cn/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://blog.helbing.cn/"></a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://blog.helbing.cn/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/84922eb67672cf1e41f02b4f75502f16?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://blog.helbing.cn/#about">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/84922eb67672cf1e41f02b4f75502f16?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">helbing</h4>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.helbing.cn/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.helbing.cn/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.helbing.cn/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.helbing.cn/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/helbing" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.helbing.cn/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      内存管理
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-10-24T00:00:00Z">
+        
+  
+  
+  
+  
+    24 October 2019
+  
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>提到内存管理，就不得不说到操作系统的虚拟化机制，当然这是一个抽象的概念。程序无法直接操作硬件，往往是通过操作系统来分配虚拟内存地址，在经由操作系统的转换为对应的物理内存地址，这也就是操作系统提供的虚拟内存管理</p>
+
+<p>内存管理的主要功能如下</p>
+
+<ol>
+<li>内存空间分配与回收</li>
+<li>虚拟内存地址转物理内存地址</li>
+<li>内存空间扩充</li>
+<li>内存隔离</li>
+</ol>
+
+<p>操作系统为了保证程序执行的安全，提供了内存隔离机制，也就是不让A程序操作到B程序的内存。而内存隔离机制的实现就是操作系统提供了两级内存管理，一层是用户态层面，当每个进程加载进内存时，会分配属于进程自己的内存空间（text，stack，heap 等）。另一层是内核态层面，这块的内存由操作系统进行接管用于进程管理和内存管理，有 stack，heap，PCB 等</p>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191024114831.png" alt="" /></p>
+
+<p>其中 program text，data 和 bss 的大小在程序编译完成后就已经清楚了，可以通过 size 命令查看</p>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191024114847.png" alt="" /></p>
+
+<ul>
+<li>text：代码段，只读，包含程序指令和字符串常量等</li>
+<li>data：数据段，包含已经<code>初始化</code>的全局变量，静态变量和常量（包括字符串常量，相当于存了两份，一份在 text，一份在 data）</li>
+<li>bss：包含<code>未初始化</code>的全局变量和静态变量</li>
+<li>dec：十进制总和（单位字节）</li>
+<li>hex：十六进制总和</li>
+</ul>
+
+<blockquote>
+<p>NULL 是当程序加载进内存时会填充一个 NULL 用于表示程序的开始</p>
+</blockquote>
+
+<ul>
+<li>heap：堆，通过 malloc/free 等函数进行分配与释放内存，内存向高地址延伸或缩减</li>
+<li>stack：栈，用于存放程序临时创建的局部变量。除此之外，函数倍调用时，其参数也会被压入发起调用的进程栈中，并且待到调用结束后，函数的返回值也会被存放回栈中</li>
+</ul>
+
+<p>那么操作系统是怎么将虚拟内存地址转为物理内存地址呢？答案是这个操作不单单是操作系统做的，而是硬件与操作系统互相合作达成的。早期的地址转换实现比较简单，基址加界限机制（又称动态重定位）。CPU 提供两个硬件寄存器，基址（base）寄存器和界限（bound）寄存器，而这两个硬件寄存器被我们统称为内存管理单元（Memory Management Unit，MMU）。假设分配给进程A的是32KB开始的物理地址，即基地址是32KB。如果进程执行指令往虚拟内存地址1000写入数据，那么物理地址的计算为</p>
+
+<pre><code>physical address = virtual address. + base = 32768 + 1000 = 33768
+</code></pre>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191025160849.png" alt="" /></p>
+
+<p>还有个界限寄存器，它有什么用呢？界限寄存器的存在实际就限制了进程能访问的内存了，假设界限寄存器被设置为16KB，那么进程A实际能操作的物理内存范围就是32768 - 49152了。MMU会判断有没有超过49152或者为负数，如果超过或为负数则触发异常，这也提供了内存保护机制</p>
+
+<p>虽然现在计算机的内存都非常大，动辄16GB，32GB，但是一旦加载很多占用内存很多的进程，如 photoshop，游戏等，内存也是会不够用的。针对这种内存超载等处理有两种通用方法，一个是交换（swapping）技术，另一个是虚拟内存（virtual memory）</p>
+
+<p>交换技术就是把一个进程完整的调入内存，使该进程运行一段时间，然后把它存回磁盘。空闲进程主要存储在磁盘上，所以当它们不运行时就不会占用内存</p>
+
+<p>交换技术的操作如图 3-4 所示。开始时内存中只有进程 A。之后创建进程 B 和 C 或者从磁盘将它换入内存。图 3-4d 显示 A 被交换到磁盘。然后 D 被调入，B 被调出，最后 A 再次被调入。由于 A 的位置变化，所以在它换入的时候通过软件或者在程序运行期间（多数是这种情况）通过硬件对其地址进行重定位。例如，基址寄存器和界限寄存器就适用于这种情况</p>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027123057.png" alt="" /></p>
+
+<p>交换在内存中产生了多个空闲区（hole，也称为空洞），通过把所有的进程尽可能向下移动，有可能将这些小的空闲区合成一大块。该技术称为内存紧缩（memory compaction）。通常不进行这个操作，因为它要耗费大量的 CPU 时间。还有就是进程占用内存的大小并非是固定的，因为进程的数据段（堆）和堆栈段（栈）是会增长的，如下图所示</p>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027123116.png" alt="" /></p>
+
+<p>如果预留增长空间用完了，进程必须移动到足够大的空闲区中（它可以被交换出内存直到内存中有足够的空间），或者结束该进程。操作系统一般会通过一个空闲内存表来管理</p>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027123132.png" alt="" /></p>
+
+<p>那么如何管理呢？一般有如下算法</p>
+
+<ol>
+<li>首次适配算法（first fit），沿着链表向下一直查找，直到找到第一个足够大的空闲区，除非空闲区大小和要分配的空间大小正好一样，否则将空闲区分成两部分，一部分供进程使用且大小和要分配的空间大小一样，另一部分形成新的空闲区</li>
+<li>最佳适配（best fit）算法，搜索整个链表（从开始到结束），找出能够容纳进程的最小空闲区</li>
+</ol>
+
+<p>需要补充的是释放内存后，归还空闲内存的时候，空闲内存表会检查归还位置相邻的节点，如果地址也相邻，然后合并在一起组成更大的空闲内存</p>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027123210.png" alt="" /></p>
+
+<p>交换技术现在已经比较少用到了，主要原因是一个典型的 SATA 磁盘的读写速度 600MB/s（SATA 3.0），这意味着交换一个 1GB 的程序要1秒多。虚拟内存（virtual memory）的基本思想是每个程序拥有自己的地址空间，这个空间被分割为多个块，每个块称作页（page），每一页都有连续的地址范围</p>
+
+<p>大部分虚拟内存系统中都会使用到分页（paging）技术。操作系统会维护一个页表，每一页都有自己的虚拟地址空间，一般大小为 4KB，虚拟内存地址通过 MMU 映射到对应的物理内存地址。如果 MMU 发现没有映射到对应的物理地址，于是使 CPU 陷入到操作系统，这个陷阱称为缺页中断。这时，操作系统会找到一个很少使用的页框并把它的内容写入到磁盘（如果它不在磁盘上），然后把需要访问的页面读到刚才回收的页框中，修改映射关系，重新启动引起陷阱的指令</p>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027123237.png" alt="" /></p>
+
+<p>首先说下虚拟地址的组成，分为虚拟页号（高位部分）和偏移量（低位部分）。对于16位地址和 4KB 的页面大小，高4位可以指定16个虚拟页中的一页，而低12位确定了所选页面中的字节偏移量（0-4095）。可以参考上图理解，当然实际操作系统中虚拟地址不会只是16位，这只是为了方便理解。虚拟页号可用作页表的索引，以找到该虚拟页面对应的页表项</p>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027123259.png" alt="" /></p>
+
+<ol>
+<li>页表项一般32位大小</li>
+<li>页框号映射到对应的物理地址</li>
+<li>“在与不在”位，1表示有映射到物理地址，0则表示没有，会引起缺页中断</li>
+<li>保护（protection）位，有3位，分别代表读，写，执行该页面</li>
+<li>修改（modified）位，在写入一页时有硬件自动设置修改位。如果一个页面已经被修改过（即它是“脏”的），则必须把它写回磁盘。如果一个页面没有被修改过（即它是“干净”的），则只简单地把它丢弃就可以了，因为它在磁盘上的副本仍然是有效的。这一位有时也被称为脏位（dirty bit）</li>
+<li>访问（referenced）位，该页面被访问时就会设置访问位，它的作用是帮助操作系统在发生缺页中断时选择要淘汰的页面</li>
+<li>高速缓存禁止位，用于禁止该页面被高速缓存</li>
+</ol>
+
+<p>页表存储的内存中（每个进程都有自己的页表），由于指令操作的是虚拟内存，往往需要多次读取页面来获取到对应的物理内存，而这个多次操作也带来了性能问题。为了解决这个问题在硬件层面引入了转换检测缓冲区（translation lookaside buffer，TLB），又称为快表，位于 MMU 中，它的作用是缓存少量的页表项，当在快表中找不到时，才会去内存中的页表找</p>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027123403.png" alt="" /></p>
+
+<p>一个32位虚拟地址，页大小为 4KB，那么也有100W个页表项。为了提高地址转换速率，操作系统引入了二级页表</p>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027123427.png" alt="" /></p>
+
+<p>在图 3-13a 中，32 位的虚拟地址被划分为10位的 PT1 域，10位的 PT2 域和12位的 offset（偏移量）域。因为偏移量是 12 位，所以页面大小是 4KB，共有2^20个页面</p>
+
+<p>我们前面讲过，当发生缺页中断时，操作系统必须在内存中选择一个页面将它的内容写回到磁盘，腾出内存给即将调入的页面。那么该选择哪个页面呢？这时候就需要页面置换算法了</p>
+
+<p>我们前面讲过，当发生缺页中断时，操作系统必须在内存中选择一个页面将它的内容写回到磁盘，腾出内存给即将调入的页面。那么该选择哪个页面呢？这时候就需要页面置换算法了</p>
+
+<ol>
+<li>最优页面置换算法（OPT），发生缺页时，有些页面在内存中，其中有一页将很快被访问（也包含紧接着的下一条指令的那页），而其他页面则可能要到10，100或者1000条指令后才会被访问，每个页面都可以用在该页面首次被访问前所要执行的指令数进行标记。最佳页面置换算法只是简单地规定：标记最大的页应该被置换。这个算法是实际上不可能实现，因为操作洗头膏无法知道每个页面下次什么时候会被访问</li>
+<li>先进先出置换算法（FIFO），总是选择在主存中停留时间最长（即最老）的一页置换，即先进入内存的页，先退出内存。操作系统会维护 FIFO 队列进行处理</li>
+<li>最近最久未使用算法（LRU）： 当需要置换一页时，选择在最近一段时间里最久没有使用过的页面予以置换。那么如果知道哪个页面是最就未使用呢？用一个栈保留页号。每当访问一个页面时，就把它从栈中取出放在栈顶上。这样一来，栈顶总是放有目前使用最多的页，而栈底放着目前最少使用的页。缺点是开销比较大</li>
+<li>时钟算法（clock）：所有页面都保存在一个类似于钟面的环状链表中，当发生页面中断时，首先是检查页表项保护位中的 R 位，如果为0就淘汰该页，并将新的页插入该位置，如果为1就清除 R 位，并指向下一页，重新操作，直到找到 R 位为0的页，如图3-16所示</li>
+<li>老化算法（aging）：非常近似 LRU 的有效算法。图3-17解释了它是如何工作的。假设在第一个时钟滴答（时钟滴答0）后，页面0~5的 R 位值分别是1，0，1，0，1，1。每过一个时钟周期首先将计数器右移一位，然后将新的 R 位添加到计数器最左端。当需要淘汰页面时就淘汰计数器中值最小的那个，如果存在相同大小的，就随机淘汰一个</li>
+</ol>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027144059.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027144125.png" alt="" /></p>
+
+<p>还记得最前面的那个进程的内存分布图吗？内存被分为了多个段，program text，data，bss，heap，stack 等。所以操作系统往往采用段页式存储的方式来管理内存。大体和页式存储差不多，在这个的基础上加入了段表，来管理段（多个页组成一个段）</p>
+
+<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027151738.png" alt="" /></p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://blog.helbing.cn/tags/operate-system/">operate system</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/10/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-tooltip="文件系统">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/10/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 helbing. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/10/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-tooltip="文件系统">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/10/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fblog.helbing.cn%2F2019%2F10%2F%25E5%2586%2585%25E5%25AD%2598%25E7%25AE%25A1%25E7%2590%2586%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/84922eb67672cf1e41f02b4f75502f16?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">helbing</h4>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Software Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://blog.helbing.cn/images/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://blog.helbing.cn/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/blog.helbing.cn\/2019\/10\/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86\/';
+          
+            this.page.identifier = '\/2019\/10\/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'blog-helbing-cn';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
