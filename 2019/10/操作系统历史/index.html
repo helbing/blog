@@ -234,17 +234,17 @@
 
 <p>需要补充的是这时候已经有编程语言了，比如 FORTRAN 语言和汇编语言等等。然而大型机根本不识别，还是得通过穿孔卡片。所以假设你使用 FORTRAN 语言编程的话，得先使用打孔机把代码和数据变成穿孔卡片，如下所示</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191011113345.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030005134.png" alt="" /></p>
 
 <p>生成的穿孔卡片长这样</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191011113554.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030005122.png" alt="" /></p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191011113616.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030005106.png" alt="" /></p>
 
 <p>讲回批处理系统，程序员会把穿孔卡片送到输入室，在收集了大约一个小时的 job（理解为一个程序） 之后，这些穿孔卡片会通过 IBM 1401 大型机写入到磁带中。随后，操作员会在 IBM 7094 大型机（相比于 1401 来说性能好计算能力强）中装入一个特殊程序（现代操作系统前身，比如 FMS，FORTRAN Monitor System），操作系统会从送过来的磁带中读入 job 并执行，所有 job 的执行结果会写入到另外一盘磁带上，然后在通过 1401 将结果脱机（不与计算机联机）打印出来（这不是很麻烦吗？主要是 7094 性能比较好，而且非常贵，所以就把它主要用于计算）</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191011113700.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030005056.png" alt="" /></p>
 
 <p>一个典型的 job 如上所示，$JOB 标识了所需的运行时间（分钟），计费账号和程序员名称。$FORTRAN 告诉操作系统从系统磁带中装入 FORTRAN 语言编译器，后面就是 FORTRAN 代码。$LOAD 表示通知操作系统装入编译好的目标程序。$RUN 告诉操作系统执行程序和加载 $END 之前的数据。$END 表示 job 结束</p>
 
@@ -266,7 +266,7 @@
 
 <p>通道和中断这两个技术的结合，使得 CPU 和输入输出设备真正实现了并行工作。此时，多道程序设计的概念才变为了现实。那么什么是多道程序设计呢？多道程序设计是指在内存同时放若干道程序，使它们在系统中并发执行，共享系统中的各种资源。当一道程序暂停执行时，CPU立即转去执行另一道程序</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191011115137.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030005037.png" alt="" /></p>
 
 <p>然而多道程序系统本质上还是批处理系统，和批处理系统一样，依旧需要漫长的等待，才能拿到程序结果。程序员希望能更快的得到响应，这也催生了分时系统（timesharing）的出现。它实际上是多道程序系统的一个变体，每个用户都有一个联机终端（那个时候，终端机器通过数据总线与中央机器连接，支持中断和数据并行传输）。分时系统就是将 CPU 的运行分为多个时间片，每个作业只执行一个时间片，然后重新进入调度队列，等待下一次调用</p>
 

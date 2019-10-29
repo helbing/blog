@@ -224,7 +224,7 @@
             <div class="main-content-wrap">
               <p>我们知道不管是什么样的操作最终都会变为 CPU 指令，为了保证操作系统的稳健运行，人为的将一组指令定为<code>特权指令</code>，相对应的也划分出了内核态（Kernel Mode）和用户态（User Mode），只有内核态才有权限能操作这组特权指令。在实际中 CPU 会将指令划分到不同的特权等级中，比如 intel 的 x86 处理器有4个特权等级，RING0-3，特权等级依次递减</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191015090544.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004728.png" alt="" /></p>
 
 <p>在 Linux 操作系统中用户态工作在 RING3 中，内核态工作在 RING0 中，高等级的层有权限操作低等级的层，而低等级的层试图操作高等级的层则会显示“非法指令”的错误信息</p>
 
@@ -241,7 +241,7 @@
 
 <p>1）系统调用</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191015092922.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004718.png" alt="" /></p>
 
 <p>2）异常事件</p>
 

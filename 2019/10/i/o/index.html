@@ -224,7 +224,7 @@
             <div class="main-content-wrap">
               <p>在 Linux 系统中一切皆可以看作是文件，文件可分为：普通文件，目录文件，链接文件和设备文件等。文件描述符（file descriptor）是内核为了高效管理已被打开的文件所创建的索引，索引是一个非负整数（&gt;=0），用于指代被打开的文件，所有执行 I/O操作的系统调用都通过文件描述符。可执行程序刚启动时，0是标准输入，1是标准输出，2是标准错误。如果此时去打开一个新文件，那么它的文件描述符就为3。POSIX 标准要求每次打开文件时（含 socket）必须使用<code>当前进程中最小可用的文件描述符号码</code>，因此，在网络通信过程中稍不注意就有可能造成串话</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191021173925.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004325.png" alt="" /></p>
 
 <h2 id="文件描述符的限制">文件描述符的限制</h2>
 
@@ -278,7 +278,7 @@ int main(int argc, char const *argv[])
 
 <p>这一行的代码 <code>O_CREAT|O_TRUNC|O_WRONLY</code> 需要说明下，open 的第二个参数是一个 int 类型（32位）</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191021175302.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004309.png" alt="" /></p>
 
 <p>前三位 O_RDONLY，O_WRONLY，O_RDWR 是必选项且只能选一个，其他为可选项，通过 | （或操作）置为1</p>
 
@@ -291,7 +291,7 @@ int main(int argc, char const *argv[])
 
 <p>一些常用的 flag 如下</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191022101924.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004257.png" alt="" /></p>
 
 <h3 id="关闭文件描述符-close">关闭文件描述符 close</h3>
 
@@ -359,7 +359,7 @@ int main(int argc, char const *argv[])
 
 <p>常用 mode</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191022102726.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004240.png" alt="" /></p>
 
 <p>函数返回值为 FILE 指针，如果失败返回 NULL，失败原因会写在 errno 中</p>
 

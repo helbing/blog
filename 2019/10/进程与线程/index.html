@@ -228,9 +228,9 @@
 
 <p>在多道分时操作系统中，将 CPU 运行时间划分为多个时间片，每个进程只能执行一个时间片时间，然后重新进入<code>进程就绪态队列</code>排队，等待下一个执行。在1秒内，CPU 会执行多个进程，从而使得每个进程看起来像是并行执行的，也就是伪并行。上述的情况是单核 CPU，如果是多核 CPU 确实是能做到并行，但不是真正意义上的并行，因为还是做不到一个进程都有一个 CPU 在执行（毕竟 CPU 数量有限），每个进程依旧是只能执行一个时间片时间</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191012154847.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030005009.png" alt="" /></p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191012154906.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004959.png" alt="" /></p>
 
 <p>进程的三种状态</p>
 
@@ -286,7 +286,7 @@ int main(int argc, char const *argv[])
 
 <p>对于上面 fork/execve 的例子，你可能会奇怪怎么 parent process 和 child process 都输出了。前面讲过，父进程调用 fork 生成的子进程拥有和自己相同的副本，也就是说也拥有相同的代码副本。那么父进程和子进程都会执行 fork 之后的代码，只是它们的 pid （进程 ID）不同</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191012181902.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004947.png" alt="" /></p>
 
 <p>顺便解释下 execve，execve 的作用是运行另外一个指定的程序。它会把新程序加载到当前进程的内存空间内，当前的进程会被丢弃，它的堆，栈和所有的段数据都会被新进程相应的部分代替，然后会从新程序的初始化代码和 main 函数开始运行。同时，进程的 ID 将保持不变</p>
 
@@ -294,13 +294,13 @@ int main(int argc, char const *argv[])
 
 <p>前面讲过 CPU 会每个时刻只会执行一个进程，当前时间片执行完，就换下一个进程执行。所以操作系统会给每一个进程维护一个结构数组，称为 <code>PCB</code>（进程管理块，process control block）</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191013194253.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004937.png" alt="" /></p>
 
 <h2 id="线程">线程</h2>
 
 <p>在实际开发中，为了让程序并发执行，更大限度的利用 CPU，往往会 fork 多几个进程来执行，或者执行不同的任务，但是我们知道创建和调度进程开销是比较大的（维护 PCB），所以操作系统引入了<code>线程</code>（thread）的概念，线程可以直接理解为“轻量级进程”。线程概念的引入，将进程原有的两个职能（资源管理与执行）分开，进程负责资源管理，线程负责执行。所以有“<code>进程是操作系统资源管理的最小单位，线程是 CPU 调度的最小单位</code>”的说法。同时为了方便调度，线程同样有一个线程表</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191014104858.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004928.png" alt="" /></p>
 
 <ul>
 <li>第一列给出了在一个进程中所有线程共享的内容，第一列表项是进程的属性，而不是线程的属性</li>
@@ -311,7 +311,7 @@ int main(int argc, char const *argv[])
 
 <p>线程实现的方式有很多种，既有软件层面的，也有硬件层面的（比如 SMP，CMP，CMT 等），甚至有的操作系统还不支持多线程。软件层面上，有基于用户空间实现和基于内核空间实现等</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191014114707.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004918.png" alt="" /></p>
 
 <p>这里我们主要着重介绍基于用户空间实现的线程，这也是 Unix/Linux 主要采用的方式</p>
 
@@ -325,7 +325,7 @@ int main(int argc, char const *argv[])
 
 <p>为实现可移植的线程程序，IEEE 在 IEEE 标准 1003.1 c 中定义了线程的标准。它定义的线程包叫作 <code>pthread</code>。大部分 UNIX 系统都支持该标准</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191014114756.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004905.png" alt="" /></p>
 
 <blockquote>
 <p>通过 pthread_self 得到当前的线程 id，类型为 pthread_t。但是需要注意的是 pthread_t 在 Linux 系统中是 unsigned long int，而在 macOS，FreeBSD 中是一个 struct</p>

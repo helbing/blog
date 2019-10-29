@@ -234,11 +234,11 @@ for (int i = 0; i &lt; n; i++) {
 
 <p>上面这段代码实际执行完需要多久？实际上我们是不清楚的，除非跑一边代码才知道。但是用实际跑代码来衡量显然不符合实际，因为无法排出其他的影响。一般会采用大 O 表示法来进行衡量，假设执行一行代码的时间为 t。那么上面的代码所需的时间为 100t，但是以后 n 的值可能就不是100了，那么它的增长的数量级就为 n，所以我们认为这段代码的时间复杂度为 O(n)</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027185953.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030003710.png" alt="" /></p>
 
 <p>复杂度由小到大依次为（越小越好）</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027190008.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030003649.png" alt="" /></p>
 
 <p>空间复杂度的衡量使用大 S 表示法，衡量方式和时间复杂度差不多，不过空间复杂度衡量的是存储空间的占用情况。以上面的代码为例，它的空间复杂度为 S(n)</p>
 

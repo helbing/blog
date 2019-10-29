@@ -237,7 +237,7 @@
 <li>根目录是所有 Linux 的文件和目录所在的地方，需要挂载上一个磁盘分区</li>
 </ul>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191015155718.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004837.png" alt="" /></p>
 
 <p>为什么要分区？</p>
 
@@ -248,7 +248,7 @@
 
 <p>Linux 发行版本的常见目录</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191015160826.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004827.png" alt="" /></p>
 
 <p>大部分的 Linux 文件系统（如 ext2，ext3 等）规定，一个文件由目录项，inode 和数据块组成</p>
 
@@ -264,13 +264,13 @@
 
 <p>操作系统读取硬盘的时候，不会一个扇区一个扇区地读取，这样效率太低，而是一次性连续读取多个扇区，即一次性读取一个“块”（block）。这种由多个扇区组成的“块”，是文件存取的最小单位。“块”的大小，最常见的是 4KB，即连续八个 sector 组成一个 block</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191015161515.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004813.png" alt="" /></p>
 
 <p>文件数据都储存在“块”中，那么很显然，我们还必须有一个地方储存文件的元信息，比如文件的创建者，文件的创建日期，文件的大小等等。这种储存文件元信息的区域就叫做 inode</p>
 
 <p>那么 inode 保存了什么信息呢？可以通过 stat 命令来查看</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191015162008.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004801.png" alt="" /></p>
 
 <ul>
 <li>FILE：文件名</li>
@@ -302,7 +302,7 @@
 
 <p>总之，除了文件名以外的所有文件信息，都存在 inode 之中。为什么没有文件名？因为对于 inode 来说文件名是非必要的，它要读写块中管理的数据，只要依赖于文件类型，Blocks 和 Inode 等就足够了</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191018180155.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004615.png" alt="" /></p>
 
 <p>inode 也会消耗硬盘空间，所以硬盘格式化的时候，操作系统自动将硬盘分成两个区域。一个是数据区，存放文件数据。另一个是 inode 区（inode table），存放 inode 所包含的信息</p>
 
@@ -319,7 +319,7 @@
 
 <p>目录文件的结构非常简单，就是一系列目录项（dirent）的列表。每个目录项，主要由两部分组成：所包含文件的文件名，以及该文件名对应的 inode 号码</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191018180304.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004549.png" alt="" /></p>
 
 <ol>
 <li>inode，对应到 stat 中的 Inode，目录项就是通过 inode 找到所属的 inode 信息</li>

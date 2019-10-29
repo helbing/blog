@@ -235,11 +235,11 @@
 
 <p>操作系统为了保证程序执行的安全，提供了内存隔离机制，也就是不让A程序操作到B程序的内存。而内存隔离机制的实现就是操作系统提供了两级内存管理，一层是用户态层面，当每个进程加载进内存时，会分配属于进程自己的内存空间（text，stack，heap 等）。另一层是内核态层面，这块的内存由操作系统进行接管用于进程管理和内存管理，有 stack，heap，PCB 等</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191024114831.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004141.png" alt="" /></p>
 
 <p>其中 program text，data 和 bss 的大小在程序编译完成后就已经清楚了，可以通过 size 命令查看</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191024114847.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004119.png" alt="" /></p>
 
 <ul>
 <li>text：代码段，只读，包含程序指令和字符串常量等</li>
@@ -263,7 +263,7 @@
 <pre><code>physical address = virtual address. + base = 32768 + 1000 = 33768
 </code></pre>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191025160849.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004104.png" alt="" /></p>
 
 <p>还有个界限寄存器，它有什么用呢？界限寄存器的存在实际就限制了进程能访问的内存了，假设界限寄存器被设置为16KB，那么进程A实际能操作的物理内存范围就是32768 - 49152了。MMU会判断有没有超过49152或者为负数，如果超过或为负数则触发异常，这也提供了内存保护机制</p>
 
@@ -273,15 +273,15 @@
 
 <p>交换技术的操作如图 3-4 所示。开始时内存中只有进程 A。之后创建进程 B 和 C 或者从磁盘将它换入内存。图 3-4d 显示 A 被交换到磁盘。然后 D 被调入，B 被调出，最后 A 再次被调入。由于 A 的位置变化，所以在它换入的时候通过软件或者在程序运行期间（多数是这种情况）通过硬件对其地址进行重定位。例如，基址寄存器和界限寄存器就适用于这种情况</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027123057.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004050.png" alt="" /></p>
 
 <p>交换在内存中产生了多个空闲区（hole，也称为空洞），通过把所有的进程尽可能向下移动，有可能将这些小的空闲区合成一大块。该技术称为内存紧缩（memory compaction）。通常不进行这个操作，因为它要耗费大量的 CPU 时间。还有就是进程占用内存的大小并非是固定的，因为进程的数据段（堆）和堆栈段（栈）是会增长的，如下图所示</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027123116.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004035.png" alt="" /></p>
 
 <p>如果预留增长空间用完了，进程必须移动到足够大的空闲区中（它可以被交换出内存直到内存中有足够的空间），或者结束该进程。操作系统一般会通过一个空闲内存表来管理</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027123132.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004025.png" alt="" /></p>
 
 <p>那么如何管理呢？一般有如下算法</p>
 
@@ -292,17 +292,17 @@
 
 <p>需要补充的是释放内存后，归还空闲内存的时候，空闲内存表会检查归还位置相邻的节点，如果地址也相邻，然后合并在一起组成更大的空闲内存</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027123210.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030004002.png" alt="" /></p>
 
 <p>交换技术现在已经比较少用到了，主要原因是一个典型的 SATA 磁盘的读写速度 600MB/s（SATA 3.0），这意味着交换一个 1GB 的程序要1秒多。虚拟内存（virtual memory）的基本思想是每个程序拥有自己的地址空间，这个空间被分割为多个块，每个块称作页（page），每一页都有连续的地址范围</p>
 
 <p>大部分虚拟内存系统中都会使用到分页（paging）技术。操作系统会维护一个页表，每一页都有自己的虚拟地址空间，一般大小为 4KB，虚拟内存地址通过 MMU 映射到对应的物理内存地址。如果 MMU 发现没有映射到对应的物理地址，于是使 CPU 陷入到操作系统，这个陷阱称为缺页中断。这时，操作系统会找到一个很少使用的页框并把它的内容写入到磁盘（如果它不在磁盘上），然后把需要访问的页面读到刚才回收的页框中，修改映射关系，重新启动引起陷阱的指令</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027123237.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030003949.png" alt="" /></p>
 
 <p>首先说下虚拟地址的组成，分为虚拟页号（高位部分）和偏移量（低位部分）。对于16位地址和 4KB 的页面大小，高4位可以指定16个虚拟页中的一页，而低12位确定了所选页面中的字节偏移量（0-4095）。可以参考上图理解，当然实际操作系统中虚拟地址不会只是16位，这只是为了方便理解。虚拟页号可用作页表的索引，以找到该虚拟页面对应的页表项</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027123259.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030003935.png" alt="" /></p>
 
 <ol>
 <li>页表项一般32位大小</li>
@@ -316,11 +316,11 @@
 
 <p>页表存储的内存中（每个进程都有自己的页表），由于指令操作的是虚拟内存，往往需要多次读取页面来获取到对应的物理内存，而这个多次操作也带来了性能问题。为了解决这个问题在硬件层面引入了转换检测缓冲区（translation lookaside buffer，TLB），又称为快表，位于 MMU 中，它的作用是缓存少量的页表项，当在快表中找不到时，才会去内存中的页表找</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027123403.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030003922.png" alt="" /></p>
 
 <p>一个32位虚拟地址，页大小为 4KB，那么也有100W个页表项。为了提高地址转换速率，操作系统引入了二级页表</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027123427.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030003914.png" alt="" /></p>
 
 <p>在图 3-13a 中，32 位的虚拟地址被划分为10位的 PT1 域，10位的 PT2 域和12位的 offset（偏移量）域。因为偏移量是 12 位，所以页面大小是 4KB，共有2^20个页面</p>
 
@@ -336,13 +336,13 @@
 <li>老化算法（aging）：非常近似 LRU 的有效算法。图3-17解释了它是如何工作的。假设在第一个时钟滴答（时钟滴答0）后，页面0~5的 R 位值分别是1，0，1，0，1，1。每过一个时钟周期首先将计数器右移一位，然后将新的 R 位添加到计数器最左端。当需要淘汰页面时就淘汰计数器中值最小的那个，如果存在相同大小的，就随机淘汰一个</li>
 </ol>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027144059.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030003859.png" alt="" /></p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027144125.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030003846.png" alt="" /></p>
 
 <p>还记得最前面的那个进程的内存分布图吗？内存被分为了多个段，program text，data，bss，heap，stack 等。所以操作系统往往采用段页式存储的方式来管理内存。大体和页式存储差不多，在这个的基础上加入了段表，来管理段（多个页组成一个段）</p>
 
-<p><img src="https://raw.githubusercontent.com/helbing/tuchuang/master/20191027151738.png" alt="" /></p>
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191030003830.png" alt="" /></p>
               
             </div>
           </div>
