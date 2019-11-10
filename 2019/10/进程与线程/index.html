@@ -272,7 +272,7 @@ int main(int argc, char const *argv[])
         printf(&quot;child process\n&quot;);
         // 调用命令的末尾一定要带一个空指针 NULL
         char * argv[] = {&quot;ls&quot;, &quot;-al&quot;, &quot;/etc/passwd&quot;, NULL};
-        execv(&quot;/bin/ls&quot;, argv);
+        execve(&quot;/bin/ls&quot;, argv);
     } else {
         // pid 大于 0 说明当前进程是父进程，pid 的值为 fork 生成的子进程 ID
         printf(&quot;parent process\n&quot;);
@@ -291,6 +291,8 @@ int main(int argc, char const *argv[])
 <p>顺便解释下 execve，execve 的作用是运行另外一个指定的程序。它会把新程序加载到当前进程的内存空间内，当前的进程会被丢弃，它的堆，栈和所有的段数据都会被新进程相应的部分代替，然后会从新程序的初始化代码和 main 函数开始运行。同时，进程的 ID 将保持不变</p>
 
 <p>在 Unix/Linux 程序开发中，fork 子进程后，一般都会 execve 系统调用。出于效率考虑，操作系统引入了<code>写时复制</code>（COW，Copy On Write），fork 子进程后，实际子进程和父进程还是使用相同的物理空间的，只是虚拟空间不同，只有当进程空间的各段内容要发生改变时，才会将父进程的内容拷贝一份给子进程。设想下在没有写时复制前，fork 子进程就开辟新的内存空间给子进程，然后将父进程的资源完全拷贝一份到子进程内存空间，这时候如果执行 execve，那之前的拷贝就完全没意义了</p>
+
+<p>补充下 execve 系统调用实际上是将要执行的新进程的 text，data，bbs，argc，argv，环境变量这几个段替换到当前进程的对应内存段中，简称“换核不换壳”</p>
 
 <p>前面讲过 CPU 会每个时刻只会执行一个进程，当前时间片执行完，就换下一个进程执行。所以操作系统会给每一个进程维护一个结构数组，称为 <code>PCB</code>（进程管理块，process control block）</p>
 
