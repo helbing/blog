@@ -238,12 +238,14 @@
 
 <p>这里不是要讲 open 和 fopen 这两个函数，而且要讲系统调用（提供了 open）和 C 标准库（提供了 fopen）的区别。当你使用 C 标准库的相关 I/O 调用时，会返回一个 FILE 结构体指针，我们讲过进程启动后默认会有3个文件描述符（0，1，2），同样默认也有3个 FILE 结构体指针对应到3个文件描述符，它们是 stdin，stdout 和 stderr</p>
 
-<p>fopen 是基于 open 实现的，当我们使用 fopen 打开文件时会返回 FILE 结构体指针，它包含了文件描述符，读写内容的游标和 buffer cache （一般大小为 8kb）等。当你使用 fopen 操作文件时，它不会直接将数据写入到对应文件中，而是暂缓在 buffer cache 中，只有下面3种情况才会将数据回写到对应的文件中</p>
+<p>fopen 是基于 open 实现的，当我们使用 fopen 打开文件时会返回 FILE 结构体指针，它包含了文件描述符，读写内容的游标和 buffer cache （一般大小为 8kb）等。当你使用 fopen 操作文件时，它不会直接将数据写入到对应文件中，而是暂缓在 buffer cache 中，只有下面几种情况才会将数据回写到对应的文件中</p>
 
 <ol>
 <li>buffer cache 满了</li>
 <li>调用 fclose，释放了文件描述符和 buffer cache</li>
 <li>调用 fflush，手动释放了 buffer cache</li>
+<li>scanf 在缓冲区里取数据时会先将缓冲区刷新</li>
+<li>printf 写入的字符中含有 \n，\r</li>
 </ol>
 
 <p>通过下面这个例子了解 open 和 fopen</p>
