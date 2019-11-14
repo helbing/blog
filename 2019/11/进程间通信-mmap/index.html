@@ -281,7 +281,7 @@ int main()
 
     printf(&quot;%s&quot;, start);
 
-	// 释放 mmap
+    // 释放 mmap
     munmap(start, sb.st_size);
 
     close(fd);
