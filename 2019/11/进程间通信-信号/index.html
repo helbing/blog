@@ -13,20 +13,20 @@
 
 <meta property="og:description" content="">
 <meta property="og:type" content="article">
-<meta property="og:title" content="进程间通信-mmap">
-<meta name="twitter:title" content="进程间通信-mmap">
-<meta property="og:url" content="https://blog.helbing.cn/2019/11/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-mmap/">
-<meta property="twitter:url" content="https://blog.helbing.cn/2019/11/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-mmap/">
+<meta property="og:title" content="进程间通信-信号">
+<meta name="twitter:title" content="进程间通信-信号">
+<meta property="og:url" content="https://blog.helbing.cn/2019/11/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-%E4%BF%A1%E5%8F%B7/">
+<meta property="twitter:url" content="https://blog.helbing.cn/2019/11/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-%E4%BF%A1%E5%8F%B7/">
 <meta property="og:site_name" content="">
 <meta property="og:description" content="">
 <meta name="twitter:description" content="">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2019-11-13T00:00:00">
+    <meta property="article:published_time" content="2019-11-14T00:00:00">
   
   
-    <meta property="article:modified_time" content="2019-11-13T00:00:00">
+    <meta property="article:modified_time" content="2019-11-14T00:00:00">
   
   
   
@@ -53,14 +53,14 @@
   <meta property="twitter:image" content="https://www.gravatar.com/avatar/84922eb67672cf1e41f02b4f75502f16?s=640">
 
 
-    <title>进程间通信-mmap</title>
+    <title>进程间通信-信号</title>
 
     <link rel="icon" href="https://blog.helbing.cn/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://blog.helbing.cn/2019/11/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-mmap/">
+    <link rel="canonical" href="https://blog.helbing.cn/2019/11/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-%E4%BF%A1%E5%8F%B7/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -198,19 +198,19 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      进程间通信-mmap
+      进程间通信-信号
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2019-11-13T00:00:00Z">
+      <time itemprop="datePublished" datetime="2019-11-14T00:00:00Z">
         
   
   
   
   
-    13 November 2019
+    14 November 2019
   
 
       </time>
@@ -222,72 +222,314 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>mmap 用来将某个文件内容映射到内存中，对该内存区域的存取即是直接对该文件内容的读写，mmap 的函数签名如下</p>
+              <p>信号（signal），又称为软中断信号，用来通知进程发生了异步事件。信号的特点是简单，不能携带大量信息，满足特定条件发生。一个信号有以下部分组成</p>
 
-<pre><code class="language-c">void *mmap(void *start, size_t length, int prot, int flags, int fd, off_t offsize);
+<ol>
+<li>编号</li>
+<li>名称</li>
+<li>事件，即引起信号产生的事件</li>
+<li>默认处理动作，即信号产生后的行为</li>
+</ol>
+
+<p>我们可以通过 kill -l 命令获取到操作系统提供的信号的编号和名称</p>
+
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191114103813.png" alt="" /></p>
+
+<p>信号默认的处理动作有5个</p>
+
+<ol>
+<li>Term，终止进程</li>
+<li>Ign，忽略信号</li>
+<li>Core，终止进程并产生 core</li>
+<li>Stop，暂停进程</li>
+<li>Cont，重新运行进程，如果进程被停止</li>
+</ol>
+
+<p>下面的信号是符合 POSIX.1-1990 标准的</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">Signal</th>
+<th align="center">Value</th>
+<th align="center">Action</th>
+<th align="center">Comment</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">SIGHUP</td>
+<td align="center">1</td>
+<td align="center">Term</td>
+<td align="center">Hangup detected on controlling terminal or death of controlling process</td>
+</tr>
+
+<tr>
+<td align="center">SIGINT</td>
+<td align="center">2</td>
+<td align="center">Term</td>
+<td align="center">Interrupt from keyboard</td>
+</tr>
+
+<tr>
+<td align="center">SIGQUIT</td>
+<td align="center">3</td>
+<td align="center">Core</td>
+<td align="center">Quit from keyboard</td>
+</tr>
+
+<tr>
+<td align="center">SIGILL</td>
+<td align="center">4</td>
+<td align="center">Core</td>
+<td align="center">Illegal Instruction</td>
+</tr>
+
+<tr>
+<td align="center">SIGABRT</td>
+<td align="center">6</td>
+<td align="center">Core</td>
+<td align="center">Abort signal from abort(3)</td>
+</tr>
+
+<tr>
+<td align="center">SIGFPE</td>
+<td align="center">8</td>
+<td align="center">Core</td>
+<td align="center">Floating-point exception</td>
+</tr>
+
+<tr>
+<td align="center">SIGKILL</td>
+<td align="center">9</td>
+<td align="center">Term</td>
+<td align="center">Kill signal</td>
+</tr>
+
+<tr>
+<td align="center">SIGSEGV</td>
+<td align="center">11</td>
+<td align="center">Core</td>
+<td align="center">Invalid memory reference</td>
+</tr>
+
+<tr>
+<td align="center">SIGPIPE</td>
+<td align="center">13</td>
+<td align="center">Term</td>
+<td align="center">Broken pipe: write to pipe with no readers; see pipe(7)</td>
+</tr>
+
+<tr>
+<td align="center">SIGALRM</td>
+<td align="center">14</td>
+<td align="center">Term</td>
+<td align="center">Timer signal from alarm(2)</td>
+</tr>
+
+<tr>
+<td align="center">SIGTERM</td>
+<td align="center">15</td>
+<td align="center">Term</td>
+<td align="center">Termination signal</td>
+</tr>
+
+<tr>
+<td align="center">SIGUSR1</td>
+<td align="center">30,10,16</td>
+<td align="center">Term</td>
+<td align="center">User-defined signal 1</td>
+</tr>
+
+<tr>
+<td align="center">SIGCHLD</td>
+<td align="center">20,17,18</td>
+<td align="center">Ign</td>
+<td align="center">User-defined signal 2</td>
+</tr>
+
+<tr>
+<td align="center">SIGCONT</td>
+<td align="center">19,18,25</td>
+<td align="center">Cont</td>
+<td align="center">Continue if stopped</td>
+</tr>
+
+<tr>
+<td align="center">SIGSTOP</td>
+<td align="center">17,19,23</td>
+<td align="center">Stop</td>
+<td align="center">Stop process</td>
+</tr>
+
+<tr>
+<td align="center">SIGTSTP</td>
+<td align="center">18,20,24</td>
+<td align="center">Stop</td>
+<td align="center">Stop typed at terminal</td>
+</tr>
+
+<tr>
+<td align="center">SIGTTIN</td>
+<td align="center">21,21,26</td>
+<td align="center">Stop</td>
+<td align="center">Terminal input for background process</td>
+</tr>
+
+<tr>
+<td align="center">SIGTTOU</td>
+<td align="center">22,22,27</td>
+<td align="center">Stop</td>
+<td align="center">Terminal output for background process</td>
+</tr>
+</tbody>
+</table>
+
+<p>需要注意的是，信号 SIGKILL 和 SIGSTOP 这两个信号不能被捕获，阻塞或忽略。其他的信号这里不做介绍，可以通过 man 7 signal 这个命令进行查看</p>
+
+<p>在进程的 PCB 中存在着未决（pending）信号集和阻塞（block）信号集，信号集本质上就是个64位大小的位图，从1-64代表着每一个信号</p>
+
+<ul>
+<li>当某个信号被进程设置为阻塞时，在阻塞信号集中对应的位就会被设置为1，代表对应信号被阻塞</li>
+<li>当某个信号被进程捕获后，在未决信号集中对应的位就会被设置为1，代表对应信号被未决，等待进程处理，进程在处理之前会检查阻塞信号表，如果对应信号没有被阻塞，则处理信号，处理结束后，未决信号集中对应的位设置为0</li>
+</ul>
+
+<p><img src="https://tuchuang-1253782374.cos.ap-guangzhou.myqcloud.com/20191114105240.png" alt="" /></p>
+
+<p>我们知道在终端中使用 ctrl+c 能产生 SIGINT 信号终止进程。现在我们来写一个例子，将 SIGINT 设置为阻塞状态。使用到的函数是 sigprocmask，它的函数签名如下</p>
+
+<pre><code class="language-c">int sigprocmask(int how, const sigset_t *set, sigset_t * oldset);
 </code></pre>
 
 <ul>
-<li>start，指向欲对应的内存起始地址，不过一般填 NULL，让操作系统自动选定地址</li>
-<li>length，表示申请内存的大小</li>
-<li>prot，表示映射区域的保护方式
+<li>how
 
 <ul>
-<li>PROT_EXEC，映射区域可被执行</li>
-<li>PROT_READ，映射区域可被读取</li>
-<li>PROT_WRITE，映射区域可被写入</li>
-<li>PROT_NONE，映射区域不可读写</li>
+<li>SIG_BLOCK，传入的信号集与现有的阻塞信号集做或操作，结果作为新的阻塞信号集</li>
+<li>SIG_UNBLOCK，传入的信号集与现有的阻塞信号集做与操作，结果作为新的阻塞信号集</li>
+<li>SIG_SETMASK，传入的信号集直接替换现有的信号集</li>
 </ul></li>
-<li>flags
+<li>set，传入的信号集</li>
+<li>oldset，旧的信号集</li>
+<li>返回值，成功返回0，失败返回-1，失败原因在 errno 中</li>
+</ul>
+
+<p>下面是一个简单的例子</p>
+
+<pre><code class="language-c">int main()
+{
+    // 创建一个信号集
+    sigset_t set;
+    // 创建一个信号集，专门用于接收旧的信号集
+    sigset_t oldSet;
+    // 信号集清零
+    sigemptyset(&amp;set);
+    // 将对应信号的位设置为1
+    sigaddset(&amp;set, SIGINT);
+    // 将信号集与现有的阻塞信号集做或操作，结果作为新的阻塞信号集
+    // 如果不想知道操作前的阻塞信号集，oldset 传 NULL 就行了
+    sigprocmask(SIG_BLOCK, &amp;set, &amp;oldSet);
+
+    for (int i = 0; i &lt; 60; i++) {
+        printf(&quot;%d\n&quot;, i);
+        sleep(1);
+    }
+}
+</code></pre>
+
+<p>接下来，启动进程后，你在试下看看，键入 ctrl+c 是否还能终止进程</p>
+
+<p>我们在来讲一个我们平常很经常用的命令，kill 命令，我们常用它来杀死进程，其实这个命令是作用是将信号发送给进程，或者用于显示信号列表 kill -l。kill 同样也有对应函数，函数签名如下</p>
+
+<pre><code class="language-c">int kill(pid_t pid, int sig);
+</code></pre>
 
 <ul>
-<li>MAP_SHARED，对应射区域的写入数据会复制回文件内，而且允许其他映射该文件的进程共享</li>
-<li>MAP_PRIVATE，对应射区域的写入操作会产生一个映射文件的复制，即私人的“写入时复制”（copy on write）对此区域作的任何修改都不会写回原来的文件内容</li>
-<li>MAP_ANONYMOUS，建立匿名映射，此时会忽略参数fd，不涉及文件，而且映射区域无法和其他进程共享</li>
-<li>MAP_LOCKED，将映射区域锁定住，这表示该区域不会被置换（swap）</li>
-<li>在调用 mmap 时必须要指定 MAP_SHARED 或 MAP_PRIVATE</li>
-</ul></li>
-<li>fd，映射文件的文件描述符</li>
-<li>offset，文件映射便宜量，通常设置为0，offset 必须是分页大小的整数倍</li>
-<li>返回值
+<li>pid
 
 <ul>
-<li>成功返回映射地址的首地址</li>
-<li>失败返回 MAP_FAILED，即是 (void *) -1，错误原因在 errno</li>
+<li>pid&gt;0，将信号传给进程 id 为 pid 的进程</li>
+<li>pid=0，将信号传给和当前进程相同进程组的所有进程</li>
+<li>pid=-1，将信号广播传送给系统内所有的进程</li>
 </ul></li>
+<li>sig，信号</li>
+<li>返回值，成功为0，失败为-1，失败原因在 errno</li>
 </ul>
 
 <p>下面是一个简单的例子</p>
 
 <pre><code class="language-c">#include &lt;sys/types.h&gt;
-#include &lt;sys/stat.h&gt;
-#include &lt;fcntl.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;sys/mman.h&gt;
+#include &lt;signal.h&gt;
 #include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
 
 int main()
 {
-    struct stat sb;
-    int fd = open(&quot;/etc/passwd&quot;, O_RDONLY);
+    pid_t pid = fork();
 
-    fstat(fd, &amp;sb);
-
-    void* start = mmap(NULL, sb.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
-
-    if (start == MAP_FAILED) {
-        return -1;
+    if (pid &gt; 0) {
+        // 3秒后，父进程发送一个 SIGKILL 信号给子进程
+        sleep(3);
+        kill(pid, SIGKILL);
+    } else if (pid == 0) {
+        while (1)
+        {
+            printf(&quot;I am children\n&quot;);
+            sleep(1);
+        }
     }
-
-    printf(&quot;%s&quot;, start);
-
-	// 释放 mmap
-    munmap(start, sb.st_size);
-
-    close(fd);
 
     return 0;
 }
+</code></pre>
+
+<p>你可以通过 alarm 给当前进程设置一个信号时钟，设定多少秒后给当前进程发送一个 SIGALRM 信号，alarm 的函数签名如下</p>
+
+<pre><code class="language-c">unsigned int alarm(unsigned int seconds);
+</code></pre>
+
+<ul>
+<li>seconds，秒数，如果 seconds 为0，则相当于取消闹钟</li>
+<li>返回值为之前闹钟的剩余秒数，如果之前未设置闹钟则返回0</li>
+</ul>
+
+<p>为了方便演示例子，我们在讲多一个函数 signal，它的作用是用于设置信号处理行为，替换信号的默认行为。它的函数签名如下</p>
+
+<pre><code class="language-c">void (*signal(int signum, void(* handler)(int)))(int);
+</code></pre>
+
+<p>下面是一个简单的例子</p>
+
+<pre><code class="language-c">#include &lt;sys/types.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+void handler()
+{
+    printf(&quot;接收到信号\n&quot;);
+}
+
+int main()
+{
+    // 设置当前进程 SIGALRM 信号的处理行为
+    signal(SIGALRM, handler);
+
+    // 3秒后收到 SIGALRM 信号
+    alarm(3);
+
+    for (int i = 0; i &lt; 5; i++) {
+        printf(&quot;%d\n&quot;, i);
+        sleep(1);
+    }
+}
+// 0
+// 1
+// 2
+// 接收到信号
+// 3
+// 4
 </code></pre>
               
             </div>
@@ -313,7 +555,7 @@ int main()
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/11/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-fifo/" data-tooltip="进程间通信-FIFO">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/11/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-mmap/" data-tooltip="进程间通信-mmap">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -321,7 +563,7 @@ int main()
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/11/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-%E4%BF%A1%E5%8F%B7/" data-tooltip="进程间通信-信号">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
@@ -339,7 +581,7 @@ int main()
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/11/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-mmap/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/11/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-%E4%BF%A1%E5%8F%B7/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -387,7 +629,7 @@ int main()
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/11/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-fifo/" data-tooltip="进程间通信-FIFO">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/11/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-mmap/" data-tooltip="进程间通信-mmap">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -395,7 +637,7 @@ int main()
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.helbing.cn/2019/11/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-%E4%BF%A1%E5%8F%B7/" data-tooltip="进程间通信-信号">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
@@ -413,7 +655,7 @@ int main()
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/11/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-mmap/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.helbing.cn/2019/11/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-%E4%BF%A1%E5%8F%B7/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -443,7 +685,7 @@ int main()
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fblog.helbing.cn%2F2019%2F11%2F%25E8%25BF%259B%25E7%25A8%258B%25E9%2597%25B4%25E9%2580%259A%25E4%25BF%25A1-mmap%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fblog.helbing.cn%2F2019%2F11%2F%25E8%25BF%259B%25E7%25A8%258B%25E9%2597%25B4%25E9%2580%259A%25E4%25BF%25A1-%25E4%25BF%25A1%25E5%258F%25B7%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
@@ -533,9 +775,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/blog.helbing.cn\/2019\/11\/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-mmap\/';
+          this.page.url = 'https:\/\/blog.helbing.cn\/2019\/11\/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-%E4%BF%A1%E5%8F%B7\/';
           
-            this.page.identifier = '\/2019\/11\/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-mmap\/'
+            this.page.identifier = '\/2019\/11\/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-%E4%BF%A1%E5%8F%B7\/'
           
         };
         (function() {
