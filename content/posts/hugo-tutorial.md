@@ -1,7 +1,7 @@
 +++
 title = "Hugo 入门教程"
 date = 2020-07-12T00:00:00+08:00
-lastmod = 2020-07-12T21:11:42+08:00
+lastmod = 2020-07-12T21:57:57+08:00
 tags = ["hugo", "emacs"]
 draft = false
 +++
@@ -120,4 +120,56 @@ hugo
 编译输出的静态 html 文件，默认保存到 `public` 目录下
 
 
-## 部署 {#部署}
+## ox-hugo {#ox-hugo}
+
+由于我的计划是使用 org-mode 来写博客，所以我需要使用 ox-hugo 转为 markdown
+
+
+### 安装 ox-hugo {#安装-ox-hugo}
+
+我使用的是 use-package 来做包管理，所以只需要加入
+
+```elisp
+(use-package ox-hugo
+  :init
+  (with-eval-after-load 'ox
+    (require 'ox-hugo)))
+```
+
+如果你使用的是其他的包管理，可以参考官方文档来安装，[https://ox-hugo.scripter.co/doc/installation/](https://ox-hugo.scripter.co/doc/installation/)
+
+
+### 为 org-mode 添加 yasnippet {#为-org-mode-添加-yasnippet}
+
+```nil
+# -*- mode: snippet -*-
+# name: create blog
+# key: cb
+# --
+#+HUGO_BASE_DIR: /path/to/blog
+#+HUGO_SECTION: posts
+#+TITLE: $1
+#+DATE: $2
+#+HUGO_TAGS: $3
+#+HUGO_AUTO_SET_LASTMOD: t
+#+HUGO_DRAFT: nil
+#+OPTIONS: AUTHOR:nil
+
+$4
+
+<!--more-->
+
+$0
+```
+
+
+### 编写 org 博文 {#编写-org-博文}
+
+使用上面的 yasnippet 生成模板，然后编辑博文即可
+
+
+### 编译 markdown {#编译-markdown}
+
+```elisp
+C-c C-e H H
+```

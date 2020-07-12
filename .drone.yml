@@ -3,9 +3,8 @@ name: default
 
 steps:
 - name: build
-  image: golang:latest
+  image: klakegg/hugo:latest
   commands:
-    - go get -v github.com/spf13/hugo
     - git submodule init
     - git submodule update
     - hugo
