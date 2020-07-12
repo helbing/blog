@@ -1,0 +1,27 @@
+kind: pipeline
+name: default
+
+steps:
+- name: build
+  image: golang:latest
+  commands:
+    - go get -v github.com/spf13/hugo
+    - git submodule init
+    - git submodule update
+    - hugo
+
+- name: publish gh-page
+  image: plugins/gh-pages
+  settings:
+    target_branch: gh-pages
+    pages_directory: public/
+    username:
+      from_secret: github_username
+    password:
+      from_secret: github_password
+  when:
+    branch:
+    - master
+    event:
+      exclude:
+      - pull_request
