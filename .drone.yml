@@ -3,10 +3,11 @@ name: default
 
 steps:
 - name: build
-  image: klakegg/hugo:latest
+  image: klakegg/hugo:latest-ext
   commands:
+    -
     - git submodule init
-    - git submodule update
+    - git submodule update --remote
     - hugo
 
 - name: publish gh-page
