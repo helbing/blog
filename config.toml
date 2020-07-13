@@ -1,4 +1,4 @@
-baseURL = "http://localhost:1313/"
+baseURL = "https://blog.helbing.cn/"
 languageCode = "en"
 defaultContentLanguage = "en"
 title = "DEMO"                         # site title  # 网站标题
@@ -49,7 +49,7 @@ pygmentscodefencesguesssyntax = true
   enableMathJax = true                                                 # enable mathjax  # 是否使用mathjax（数学公式）
   enableSummary = true                                                 # display the article summary  # 是否显示文章摘要
   mainSections = ["posts","post"]
-  
+
 # Valine.
 # You can get your appid and appkey from https://leancloud.cn
 # more info please open https://valine.js.org
