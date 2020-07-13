@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on DEMO</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>https://blog.helbing.cn/posts/</link>
     <description>Recent content in Posts on DEMO</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sun, 12 Jul 2020 00:00:00 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.helbing.cn/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hugo 入门教程</title>
-      <link>http://localhost:1313/posts/hugo-tutorial/</link>
+      <link>https://blog.helbing.cn/posts/hugo-tutorial/</link>
       <pubDate>Sun, 12 Jul 2020 00:00:00 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/hugo-tutorial/</guid>
+      <guid>https://blog.helbing.cn/posts/hugo-tutorial/</guid>
       <description>&lt;p&gt;第 N 次 Hugo 入门，这次重新捡回 Hugo 主要原因是打算使用 org-mode 来管理我的笔记与博文，那么 ox-hugo 自然是不可或缺的，所以重新写了篇 Hugo 入门教程。如果想深入了解 Hugo 的话，推荐看它的&lt;a href=&#34;https://gohugo.io/documentation/&#34;&gt;官方文档&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
