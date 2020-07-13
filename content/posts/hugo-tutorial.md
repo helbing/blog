@@ -1,7 +1,7 @@
 +++
 title = "Hugo 入门教程"
 date = 2020-07-12T00:00:00+08:00
-lastmod = 2020-07-12T21:57:57+08:00
+lastmod = 2020-07-13T09:28:19+08:00
 tags = ["hugo", "emacs"]
 draft = false
 +++
@@ -139,7 +139,7 @@ hugo
 如果你使用的是其他的包管理，可以参考官方文档来安装，[https://ox-hugo.scripter.co/doc/installation/](https://ox-hugo.scripter.co/doc/installation/)
 
 
-### 为 org-mode 添加 yasnippet {#为-org-mode-添加-yasnippet}
+### 为 org-mode 添加 snippet {#为-org-mode-添加-snippet}
 
 ```nil
 # -*- mode: snippet -*-
@@ -165,7 +165,7 @@ $0
 
 ### 编写 org 博文 {#编写-org-博文}
 
-使用上面的 yasnippet 生成模板，然后编辑博文即可
+使用上面的 `snippet` 生成模板，然后编辑博文即可
 
 
 ### 编译 markdown {#编译-markdown}
