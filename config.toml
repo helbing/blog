@@ -1,4 +1,4 @@
-baseURL = "https://blog.helbing.cn/"
+baseURL = "https://helbing.github.io/blog/"
 languageCode = "en"
 defaultContentLanguage = "en"
 title = "DEMO"                         # site title  # 网站标题
