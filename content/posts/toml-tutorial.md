@@ -1,7 +1,6 @@
 +++
 title = "TOML 入门教程"
 date = 2020-07-13T00:00:00+08:00
-lastmod = 2020-07-13T13:24:23+08:00
 tags = ["toml"]
 draft = false
 +++
@@ -10,7 +9,7 @@ draft = false
 
 <!--more-->
 
-## 格式约定 {#格式约定}
+## 格式约定
 
 - TOML 是大小写敏感的
 - 编码格式使用 UTF-8
@@ -18,17 +17,17 @@ draft = false
 - boolean 类型使用 true/false，小写格式
 - 时间日期遵循 [rfc3339](https://tools.ietf.org/html/rfc3339)
 
-## 语法 {#语法}
+## 语法
 
-### string {#string}
+### string
 
-#### single {#single}
+#### single
 
 ```toml
 key = "value"
 ```
 
-#### multi {#multi}
+#### multi
 
 ```toml
 key = """
@@ -47,7 +46,7 @@ key = "value1\r\nvalue2\r\nvalue3"
 
 ```toml
 key = """
-value1 \
+value1\
 value2
 """
 ```
@@ -55,10 +54,10 @@ value2
 等同于
 
 ```toml
-key = "value1 value2"
+key = "value1value2"
 ```
 
-### array {#array}
+### array
 
 ```toml
 key = [
@@ -69,7 +68,7 @@ key = [
 
 `记住，每个数组元素的数据类型必须一致`
 
-### hashmap {#hashmap}
+### hashmap
 
 ```toml
 [table]
@@ -95,7 +94,7 @@ key = "value"
 {"first":{"second":{"key":"value"}}}
 ```
 
-### hashmap array {#hashmap-array}
+### hashmap array
 
 ```toml
 [[demo]]
@@ -111,6 +110,6 @@ key = "value"
 [{"key":"value"},{"key":"value"}]
 ```
 
-## 为什么需要 TOML {#为什么需要-toml}
+## 为什么需要 TOML
 
 关于这点可以直接看作者的回答，[Comparison with Other Formats](https://github.com/toml-lang/toml#comparison-with-other-formats)
