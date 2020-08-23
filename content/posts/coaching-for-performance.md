@@ -2,7 +2,7 @@
 title = "《高绩效教练》读书笔记"
 date = 2020-08-23T19:25:17+08:00
 tags = ["reading"]
-draft = true
+draft = false
 +++
 
 <!--more-->
