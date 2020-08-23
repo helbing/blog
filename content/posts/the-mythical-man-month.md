@@ -2,7 +2,7 @@
 title = "《人月神话》读书笔记"
 date = 2020-08-23T16:36:23+08:00
 tags = ["reading"]
-draft = true
+draft = false
 +++
 
 首先用代序中我很认同的一句话作为开头
