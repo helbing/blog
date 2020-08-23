@@ -3,38 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://helbing.github.io/blog/about/</loc>
-    <lastmod>2020-07-12T17:24:12+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://helbing.github.io/blog/</loc>
-    <lastmod>2020-07-13T09:28:19+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://helbing.github.io/blog/tags/emacs/</loc>
-    <lastmod>2020-07-13T09:28:19+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://helbing.github.io/blog/tags/hugo/</loc>
-    <lastmod>2020-07-13T09:28:19+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://helbing.github.io/blog/posts/hugo-tutorial/</loc>
-    <lastmod>2020-07-13T09:28:19+08:00</lastmod>
+    <lastmod>2020-07-13T13:24:23+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://helbing.github.io/blog/posts/</loc>
-    <lastmod>2020-07-13T09:28:19+08:00</lastmod>
+    <lastmod>2020-07-13T13:24:23+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://helbing.github.io/blog/tags/</loc>
-    <lastmod>2020-07-13T09:28:19+08:00</lastmod>
+    <lastmod>2020-07-13T13:24:23+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://helbing.github.io/blog/tags/toml/</loc>
+    <lastmod>2020-07-13T13:24:23+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://helbing.github.io/blog/posts/toml-tutorial/</loc>
+    <lastmod>2020-07-13T13:24:23+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://helbing.github.io/blog/about/</loc>
+    <lastmod>2020-07-12T17:24:12+08:00</lastmod>
   </url>
   
   <url>
