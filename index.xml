@@ -6,10 +6,22 @@
     <description>Recent content on DEMO</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 13 Jul 2020 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2020 16:36:23 +0800</lastBuildDate>
     
 	<atom:link href="https://helbing.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>《人月神话》读书笔记</title>
+      <link>https://helbing.github.io/blog/posts/the-mythical-man-month/</link>
+      <pubDate>Sun, 23 Aug 2020 16:36:23 +0800</pubDate>
+      
+      <guid>https://helbing.github.io/blog/posts/the-mythical-man-month/</guid>
+      <description>&lt;p&gt;首先用代序中我很认同的一句话作为开头&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;回首软件工程近40年的发展，Jackson 哀叹软件行业普遍缺乏专业性，充满了业余人员，“手中有一个锤子，看到什么都是钉子”，谁都能开发性命攸关的软件&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
     
     <item>
       <title>TOML 入门教程</title>

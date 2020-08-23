@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on DEMO</title>
-    <link>https://helbing.github.io/blog/posts/</link>
-    <description>Recent content in Posts on DEMO</description>
+    <title>reading on DEMO</title>
+    <link>https://helbing.github.io/blog/tags/reading/</link>
+    <description>Recent content in reading on DEMO</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sun, 23 Aug 2020 16:36:23 +0800</lastBuildDate>
     
-	<atom:link href="https://helbing.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://helbing.github.io/blog/tags/reading/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -21,15 +21,6 @@
 &lt;blockquote&gt;
 &lt;p&gt;回首软件工程近40年的发展，Jackson 哀叹软件行业普遍缺乏专业性，充满了业余人员，“手中有一个锤子，看到什么都是钉子”，谁都能开发性命攸关的软件&lt;/p&gt;
 &lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title>TOML 入门教程</title>
-      <link>https://helbing.github.io/blog/posts/toml-tutorial/</link>
-      <pubDate>Mon, 13 Jul 2020 00:00:00 +0800</pubDate>
-      
-      <guid>https://helbing.github.io/blog/posts/toml-tutorial/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/toml-lang/toml&#34;&gt;TOML&lt;/a&gt; 的全称是 Tom&amp;rsquo;s Obvious Minimal Language，因为它的作者是 GitHub 联合创始人 Tom Preston-Werner。TOML 的目的是成为一个极简的配置文件格式，可以无歧义地被映射为 hasmap，从而被多种语言解析&lt;/p&gt;</description>
     </item>
     
   </channel>

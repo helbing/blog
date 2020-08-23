@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="helbing" />
+	
+	
+	
+	<title>《人月神话》读书笔记 ｜ DEMO</title>
+	
+    
+    
+    <meta name="description" content="首先用代序中我很认同的一句话作为开头
+ 回首软件工程近40年的发展，Jackson 哀叹软件行业普遍缺乏专业性，充满了业余人员，“手中有一个锤子，看到什么都是钉子”，谁都能开发性命攸关的软件
+" />
+    
+
+    
+
+	
+    
+    <link rel="shortcut icon" href="https://helbing.github.io/blog/images/favicon.ico" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="https://helbing.github.io/blog/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://helbing.github.io/blog/css/zozo.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://helbing.github.io/blog/css/highlight.css" />
+
+    
+    
+</head>
+
+<body>
+    <div class="main animate__animated animate__fadeInDown">
+        <div class="nav_container animated fadeInDown">
+    <div class="site_nav" id="site_nav">
+        <ul>
+            
+            <li>
+                <a href="/blog/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/blog/posts/">Archive</a>
+            </li>
+            
+            <li>
+                <a href="/blog/tags/">Tags</a>
+            </li>
+            
+            <li>
+                <a href="/blog/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="menu_icon">
+        <a id="menu_icon"><i class="ri-menu-line"></i></a>
+    </div>
+</div>
+        <div class="header animated fadeInDown">
+    <div class="site_title_container">
+        <div class="site_title">
+            <h1>
+                <a href="https://helbing.github.io/blog/">
+                    <span>DEMO</span>
+                </a>
+            </h1>
+        </div>
+        <div class="description">
+            <p class="sub_title"></p>
+            <div class="my_socials">
+                
+                
+                <a href="https://github.com/helbing" title="github" target="_blank"><i class="ri-github-fill"></i></a>
+                
+                
+                <a href="https://helbing.github.io/blog/index.xml" type="application/rss+xml" title="rss" target="_blank"><i
+                        class="ri-rss-fill"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="content">
+            <div class="post_page">
+                <div class="post animate__animated animate__fadeInDown">
+                    <div class="post_title post_detail_title">
+                        <h2><a href='/blog/posts/the-mythical-man-month/'>《人月神话》读书笔记</a></h2>
+                        <span class="date">2020.08.23</span>
+                    </div>
+                    <div class="post_content markdown"><p>首先用代序中我很认同的一句话作为开头</p>
+<blockquote>
+<p>回首软件工程近40年的发展，Jackson 哀叹软件行业普遍缺乏专业性，充满了业余人员，“手中有一个锤子，看到什么都是钉子”，谁都能开发性命攸关的软件</p>
+</blockquote>
+<h2 id="焦油坑">焦油坑</h2>
+<p>作者回顾过去几十年开发过的大型系统，只有极少数的项目能同时满足目标，进度和预算的要求。每个问题看起来都能解决，但是当它们互相纠缠和累积起来的时候就如同一个焦油坑，任何一个团队都会越陷越深，无法看清问题的本质</p>
+<h2 id="人月神话">人月神话</h2>
+<p>作者用餐厅菜单中的一句话来表达这章的主题内容</p>
+<blockquote>
+<p>美食的烹调需要时间，片刻等待，更多美味，更多享受</p>
+</blockquote>
+<p>在众多软件项目中，<strong>缺乏合理的进度安排是造成项目滞后的最主要原因</strong>，作者总结了一些造成这种灾难的普遍原因，但是在我看来其中最重要的是对于人月关系，即人力(Man)与时间(Month)的理解。作者指出人力与时间不是纯粹的线性关系的，比如2个人花了2个月完成了项目，那么4个人花1个月同样也能完成项目。这种观点是错误的，它忽略了问题的复杂度，培训成本与沟通成本等。对此作者提出了 Brooks 原则</p>
+<blockquote>
+<p>向进度落后的项目中增加人手，只会使进度更加落后</p>
+</blockquote>
+<p>对于如何制定合理的项目进度，作者分享了自己多年的经验法则</p>
+<ul>
+<li>1/3计划。我的理解是任务拆解，系统设计，排期等</li>
+<li>1/6编码</li>
+<li>1/4构建测试和早期系统测试。我的理解是单元测试与系统自测</li>
+<li>1/4系统测试，所有的构建已完成。我的理解是冒烟测试，集成测试，功能测试等</li>
+</ul>
+<h2 id="外科手术团队">外科手术团队</h2>
+<p>作者指出了大型的项目团队中，最好的与最差的程序员表现出来的生产率与质量具有明显的差异，所以作者更加推崇外科手术团队式的精简团队，将项目拆解，每一个部分由一个团队解决</p>
+<h2 id="贵族专制民主政治和系统设计">贵族专制，民主政治和系统设计</h2>
+<p>作者指出概念的完整性要求设计(这里我认为是指系统设计)必须由一个人，或者非常少数且互有默契的人员来实现</p>
+<h2 id="画蛇添足">画蛇添足</h2>
+<p>看标题可能会摸不着头脑，但是如果看到英文标题，The Second-System Effect，可能会稍微有点感觉</p>
+<p>有个问题是我们在项目开发中时刻面对着的，那就是成本超出预算。这时候能采用的应对方式无非两种</p>
+<ol>
+<li>砍掉不重要的需求与设计</li>
+<li>采用成本更低的实现方式</li>
+</ol>
+<p>如果采用第二种方法，你需要明确的是</p>
+<ol>
+<li>开发人员来实现，你只能建议，不能支配</li>
+<li>自己的建议不是绝对的，可能开发人员会提出更好的方法</li>
+<li>私底下进行建议</li>
+<li>时刻准备放弃自己的建议</li>
+</ol>
+<p>还有一个问题就是过度设计的问题，当项目开发完成后，下一轮开发时，架构师往往会提出一些优化建议，可能最终会开发出一些用不上的功能，这也是为什么标题会叫画蛇添足。那么如何避免画蛇添足，如下</p>
+<ol>
+<li>至少经过拥有两个系统以上开发经验的架构师的决定</li>
+<li>警惕诱惑</li>
+</ol>
+<h2 id="贯彻执行">贯彻执行</h2>
+<p>作者这章主要提规范，感觉这章重要的东西不多</p>
+<ol>
+<li>文档手册与规格说明要规范统一，每次修改必须指明修改人与修改时间</li>
+<li>会议</li>
+<li>电话日志</li>
+</ol>
+<h2 id="为什么巴比伦塔会失败">为什么巴比伦塔会失败</h2>
+<p>距《创世纪》记载，巴比伦塔是人类继诺亚方舟之后的第二大工程壮举，同时，其也是第一个彻底失败的工程。作者指出建造巴比伦塔时不缺</p>
+<ol>
+<li>清晰的目标</li>
+<li>人力</li>
+<li>材料</li>
+<li>足够的时间</li>
+<li>足够的技术</li>
+</ol>
+<p>但是最终巴比伦塔失败的主要原因是交流与组织。交流主要的方式有</p>
+<ol>
+<li>非正式途径</li>
+<li>会议</li>
+<li>规范化手册</li>
+</ol>
+<p>组织，作者指出三种组织架构</p>
+<ol>
+<li>产品负责人与技术主管是同一个人</li>
+<li>产品负责人作为总指挥，技术主管充当其左右手</li>
+<li>技术主管作为总指挥，产品负责人充当其左右手</li>
+</ol>
+<h2 id="胸有成竹">胸有成竹</h2>
+<p>这章讲了下如何估算工作量</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">工作量 = 常数 * 指令数量^1.5
+</code></pre></div><ul>
+<li>指令数量，考虑到当时基本是使用汇编开发，指的应该是汇编指令</li>
+<li>1.5这个数字是研究得出的结果</li>
+</ul>
+<h2 id="削足适履">削足适履</h2>
+<p>这章主要讲编程时面临的问题，空间换时间与时间换空间的问题，算法与数据结构的重要性</p>
+<h2 id="提纲挈领">提纲挈领</h2>
+<p>这章再次强调文档的重要性</p>
+<h2 id="未雨绸缪">未雨绸缪</h2>
+<ol>
+<li>唯一不变的就是变化本身</li>
+<li>为变更设计系统</li>
+</ol>
+<h2 id="干将莫邪">干将莫邪</h2>
+<p>这章强调了工具的重要性</p>
+<h2 id="整体部分">整体部分</h2>
+<ol>
+<li>自上而下的设计与结构化编程</li>
+<li>单元测试</li>
+<li>集成测试</li>
+</ol>
+<h2 id="祸起萧墙">祸起萧墙</h2>
+<blockquote>
+<p>项目怎么会被延迟了整整一年的时间
+延迟的时间是一天天积累下来的</p>
+</blockquote>
+<h2 id="另外一面">另外一面</h2>
+<ol>
+<li>文档，比如需求文档，接口文档，测试用例文档等</li>
+<li>流程图，比如 UML 图，ER 图等。虽然作者很不喜欢流程图，但是就我个人而已，我还是蛮喜欢的，特别是在做系统设计时，或者是在给别人讲解设计理念时，确实能起到很大的帮助</li>
+<li>自文档化，比如说，好的注释，好的命名，好的编程规范等，总之好的代码具备<strong>自解释能力</strong></li>
+</ol>
+<h2 id="没有银弹">没有银弹</h2>
+<p>所有软件活动包括：根本任务，即打造构成抽象软件实体店复杂概念结构。次要任务，即使用编程语言表达这些抽象实体，在空间和时间限制下将它们映射为机器语言</p>
+<p>现代软件开发系统中无法规避的内在特性</p>
+<ol>
+<li>复杂性</li>
+<li>一致性</li>
+<li>可变性</li>
+<li>不可见性</li>
+</ol>
+<p>作者还提到一些潜在的银弹</p>
+<ol>
+<li>高级编程语言，比如 C/C++，Java 等</li>
+<li>面向对象</li>
+<li>增量式开发</li>
+</ol>
+<h2 id="再论没有银弹">再论“没有银弹”</h2>
+<p>作者认为软件开发中的根本任务是应该优先进行处理的，其次才是次要任务。这点我是非常认同的，这些年见过太多的程序员接到需求后就开始干活了，没想过如何设计，单纯为了实现功能而写代码。同时也见到了太多的公司将软件开发简单的理解为只是写代码而已，留给程序员思考设计的时间可以说基本没有</p>
+<h2 id="人月神话的观点是与非">《人月神话》的观点：是与非</h2>
+<p>这章相当于总结，建议看原书</p>
+<h2 id="20年后的人月神话">20年后的《人月神话》</h2>
+<p>这章同样建议看原书</p></div>
+                    <div class="post_footer">
+                        
+                        <div class="meta">
+                            <div class="info">
+                                <span class="field tags">
+                                    <i class="ri-stack-line"></i>
+                                    
+                                    <a href="https://helbing.github.io/blog/tags/reading/">reading</a>
+                                    
+                                </span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                
+                <div class="doc_comments"></div>
+                
+            </div>
+        </div>
+    </div>
+    <a id="back_to_top" href="#" class="back_to_top"><i class="ri-arrow-up-s-line"></i></a>
+    <footer class="footer">
+    <div class="powered_by">
+        <a href="https://varkai.com">Designed by VarKai,</a>
+        <a href="http://www.gohugo.io/">Proudly published with Hugo</a>
+    </div>
+
+    <div class="footer_slogan">
+        <span></span>
+    </div>
+</footer>
+    <script src="https://helbing.github.io/blog/js/jquery-3.5.1.min.js"></script>
+<link href="https://helbing.github.io/blog/css/fancybox.min.css" rel="stylesheet">
+<script src="https://helbing.github.io/blog/js/fancybox.min.js"></script>
+<script src="https://helbing.github.io/blog/js/zozo.js"></script>
+
+
+<script type="text/javascript" async
+    src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\[\[', '\]\]']],
+                processEscapes: true,
+                processEnvironments: true,
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+                TeX: {
+                    equationNumbers: { autoNumber: "AMS" },
+                    extensions: ["AMSmath.js", "AMSsymbols.js"]
+                }
+            }
+        });
+
+        MathJax.Hub.Queue(function () {
+            
+            
+            
+            var all = MathJax.Hub.getAllJax(), i;
+            for (i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+
+<style>
+    code.has-jax {
+        font: inherit;
+        font-size: 100%;
+        background: inherit;
+        border: inherit;
+        color: #515151;
+    }
+</style>
+
+
+
+</body>
+
+</html>
