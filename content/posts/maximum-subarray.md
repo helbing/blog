@@ -1,5 +1,5 @@
 +++
-title = "Maximum_subarray"
+title = "Maximum Subarray"
 date = 2020-08-24T22:45:04+08:00
 tags = ["leetcode"]
 draft = false
