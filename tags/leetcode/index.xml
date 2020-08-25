@@ -6,10 +6,19 @@
     <description>Recent content in leetcode on DEMO</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 24 Aug 2020 22:45:04 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 25 Aug 2020 12:59:08 +0800</lastBuildDate>
     
 	<atom:link href="https://helbing.github.io/blog/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Best Time to Buy and Sell Stock</title>
+      <link>https://helbing.github.io/blog/posts/best-time-to-buy-and-sell-stock/</link>
+      <pubDate>Tue, 25 Aug 2020 12:59:08 +0800</pubDate>
+      
+      <guid>https://helbing.github.io/blog/posts/best-time-to-buy-and-sell-stock/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Maximum Subarray</title>

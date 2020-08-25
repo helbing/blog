@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" >
 <head>
-	<meta name="generator" content="Hugo 0.74.3" />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,16 +8,16 @@
 	
 	
 	
-	<title>DEMO  </title>
+	<title>Best Time to Buy and Sell Stock ｜ DEMO</title>
 	
     
+    
+    <meta name="description" content="" />
     
 
     
 
 	
-	<link rel="alternate" type="application/rss+xml" href="https://helbing.github.io/blog/index.xml" title="DEMO" />
-    
     
     <link rel="shortcut icon" href="https://helbing.github.io/blog/images/favicon.ico" />
 
@@ -84,145 +83,64 @@
     </div>
 </div>
         <div class="content">
-            
-
-<div class="post animated fadeInDown">
-    <div class="post_title">
-        <h2><a href='/blog/posts/best-time-to-buy-and-sell-stock/'>Best Time to Buy and Sell Stock</a></h2>
-    </div>
-    
-    <div class="list">
-        <div class="post_content markdown">
-            <p>......</p>
-        </div>
-    </div>
-    
-    <div class="post_footer">
-        <div class="meta">
-            <div class="info">
-                <span class="field">
-                    <i class="ri-map-pin-time-line"></i>
-                    <span class="date">2020.08.25</span>
-                </span>
+            <div class="post_page">
+                <div class="post animate__animated animate__fadeInDown">
+                    <div class="post_title post_detail_title">
+                        <h2><a href='/blog/posts/best-time-to-buy-and-sell-stock/'>Best Time to Buy and Sell Stock</a></h2>
+                        <span class="date">2020.08.25</span>
+                    </div>
+                    <div class="post_content markdown"><h2 id="题目">题目</h2>
+<p>Say you have an array for which the <code>i^th</code> element is the price of a given stock on day i.</p>
+<p>If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit.</p>
+<p>Note that you cannot sell a stock before you buy one.</p>
+<p>Example 1:</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">Input: [7,1,5,3,6,4]
+Output: 5
+Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5. Not 7-1 = 6, as selling price needs to be larger than buying price.
+</code></pre></div><p>Example 2:</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">Input: [7,6,4,3,1]
+Output: 0
+Explanation: In this case, no transaction is done, i.e. max profit = 0.
+</code></pre></div><blockquote>
+<p>题目地址: <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/">Best Time to Buy and Sell Stock</a></p>
+</blockquote>
+<h2 id="解题思路">解题思路</h2>
+<p>首先确定下边界</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">prices</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre></div><p>接下来确定使用的数据结构，看样子用数组即可。最后确定下算法，考虑到 <code>prices</code>的大小没有限制，应该考虑使用 DP，<code>dp(i)</code> 表示第 i 天卖出时的最大收益</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">dp(0) = 0
+dp(1) = max(0, dp(0) + prices(1) - prices(0))
+dp(2) = max(0, dp(1) + prices(2) - prices(1))
+...
+dp(i) = max(0, dp(i) + prices(i) - prices(i-1))
+</code></pre></div><blockquote>
+<p>答案地址: <a href="https://github.com/helbing/leetcode/blob/master/array/best_time_to_buy_and_sell_stock.go">Github</a></p>
+</blockquote></div>
+                    <div class="post_footer">
+                        
+                        <div class="meta">
+                            <div class="info">
+                                <span class="field tags">
+                                    <i class="ri-stack-line"></i>
+                                    
+                                    <a href="https://helbing.github.io/blog/tags/leetcode/">leetcode</a>
+                                    
+                                </span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
                 
-                <span class="field tags">
-                    <i class="ri-stack-line"></i>
-                    
-                    <a href="https://helbing.github.io/blog/tags/leetcode/">leetcode</a>
-                    
-                </span>
                 
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="post animated fadeInDown">
-    <div class="post_title">
-        <h2><a href='/blog/posts/maximum-subarray/'>Maximum Subarray</a></h2>
-    </div>
-    
-    <div class="list">
-        <div class="post_content markdown">
-            <p>......</p>
-        </div>
-    </div>
-    
-    <div class="post_footer">
-        <div class="meta">
-            <div class="info">
-                <span class="field">
-                    <i class="ri-map-pin-time-line"></i>
-                    <span class="date">2020.08.24</span>
-                </span>
-                
-                <span class="field tags">
-                    <i class="ri-stack-line"></i>
-                    
-                    <a href="https://helbing.github.io/blog/tags/leetcode/">leetcode</a>
-                    
-                </span>
+                <div class="doc_comments"></div>
                 
             </div>
         </div>
     </div>
-</div>
-
-<div class="post animated fadeInDown">
-    <div class="post_title">
-        <h2><a href='/blog/posts/coaching-for-performance/'>《高绩效教练》读书笔记</a></h2>
-    </div>
-    
-    <div class="list">
-        <div class="post_content markdown">
-            <p>......</p>
-        </div>
-    </div>
-    
-    <div class="post_footer">
-        <div class="meta">
-            <div class="info">
-                <span class="field">
-                    <i class="ri-map-pin-time-line"></i>
-                    <span class="date">2020.08.23</span>
-                </span>
-                
-                <span class="field tags">
-                    <i class="ri-stack-line"></i>
-                    
-                    <a href="https://helbing.github.io/blog/tags/reading/">reading</a>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="post animated fadeInDown">
-    <div class="post_title">
-        <h2><a href='/blog/posts/two-sum/'>Two Sum</a></h2>
-    </div>
-    
-    <div class="list">
-        <div class="post_content markdown">
-            <p>......</p>
-        </div>
-    </div>
-    
-    <div class="post_footer">
-        <div class="meta">
-            <div class="info">
-                <span class="field">
-                    <i class="ri-map-pin-time-line"></i>
-                    <span class="date">2020.08.23</span>
-                </span>
-                
-                <span class="field tags">
-                    <i class="ri-stack-line"></i>
-                    
-                    <a href="https://helbing.github.io/blog/tags/leetcode/">leetcode</a>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="pagination">
-    
-    
-    
-    <a href="/blog/page/2/" class="next">
-        Next
-    </a>
-    
-    
-</div>
-        </div>
-    </div>
+    <a id="back_to_top" href="#" class="back_to_top"><i class="ri-arrow-up-s-line"></i></a>
     <footer class="footer">
     <div class="powered_by">
         <a href="https://varkai.com">Designed by VarKai,</a>
