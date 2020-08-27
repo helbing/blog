@@ -51,3 +51,5 @@ for ; j < len(nums); j++ {
     nums[j] = 0
 }
 ```
+
+> 答案地址: [Github](https://github.com/helbing/leetcode/blob/master/array/move_zeroes.go)
