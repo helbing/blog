@@ -8,16 +8,16 @@
 	
 	
 	
-	<title>Posts ｜ DEMO</title>
+	<title>Find All Numbers Disappeared in an Array ｜ DEMO</title>
 	
     
+    
+    <meta name="description" content="" />
     
 
     
 
 	
-	<link rel="alternate" type="application/rss+xml" href="https://helbing.github.io/blog/posts/index.xml" title="DEMO" />
-    
     
     <link rel="shortcut icon" href="https://helbing.github.io/blog/images/favicon.ico" />
 
@@ -83,81 +83,65 @@
     </div>
 </div>
         <div class="content">
-            <div class="list_with_title">
-                
-                <div class="listing_title">2020</div>
-                <div class="listing">
-                    
-                    <div class="listing_item">
-                        <div class="listing_post">
-                            <a href="/blog/posts/find-all-numbers-disappeared-in-an-array/">Find All Numbers Disappeared in an Array</a>
-                            <div class="post_time"><span class="date">08-27</span></div>
-                        </div>
+            <div class="post_page">
+                <div class="post animate__animated animate__fadeInDown">
+                    <div class="post_title post_detail_title">
+                        <h2><a href='/blog/posts/find-all-numbers-disappeared-in-an-array/'>Find All Numbers Disappeared in an Array</a></h2>
+                        <span class="date">2020.08.27</span>
                     </div>
-                    
-                    <div class="listing_item">
-                        <div class="listing_post">
-                            <a href="/blog/posts/move-zeroes/">Move Zeroes</a>
-                            <div class="post_time"><span class="date">08-27</span></div>
+                    <div class="post_content markdown"><h2 id="题目">题目</h2>
+<p>Given an array of integers where <code>1 ≤ a[i] ≤ n</code> (n = size of array), some elements appear twice and others appear once.</p>
+<p>Find all the elements of <code>[1, n]</code>inclusive that do not appear in this array.</p>
+<p>Could you do it without extra space and in <code>O(n)</code> runtime? You may assume the returned list does not count as extra space.</p>
+<p>Example:</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">Input:
+[4,3,2,7,8,2,3,1]
+
+Output:
+[5,6]
+</code></pre></div><blockquote>
+<p>题目地址: <a href="https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/">Find All Numbers Disappeared in an Array</a></p>
+</blockquote>
+<h2 id="解题思路">解题思路</h2>
+<p>看起来没有边界问题，而且题目说明了不允许使用额外的空间。最主要还是算法问题，我们采用原地<strong>原地修改</strong>的方式</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">[4,3,2,7,8,2,3,1] # 原数组，下标从1开始
+[4,3,2,-7,8,2,3,1] # 将下标abs(4)的值修改为负数
+[4,3,-2,-7,8,2,3,1] # 将下标abs(3)的值修改为负数
+[4,-3,-2,-7,8,2,3,1] # 将下标abs(-2)的值修改为负数
+[4,-3,-2,-7,8,2,3,1] # 将下标abs(-2)的值修改为负数
+[4,-3,-2,-7,8,2,3,-1] # 将下标abs(-7)的值修改为负数
+[4,-3,-2,-7,-8,2,3,-1] # 将下标abs(8)的值修改为负数
+[4,-3,-2,-7,-8,2,3,-1] # 将下标abs(8)的值修改为负数
+[4,-3,-2,-7,-8,2,3,-1] # 将下标abs(2)的值修改为负数
+[4,-3,-2,-7,-8,2,3,-1] # 将下标abs(3)的值修改为负数
+[-4,-3,-2,-7,-8,2,3,-1] # 将下标abs(-1)的值修改为负数
+</code></pre></div><p>可以看到下标为5和6为正数，那么就意味着原数组中是没有它们的，也就是这道题的答案</p>
+<blockquote>
+<p>答案地址: <a href="https://github.com/helbing/leetcode/blob/master/array/find_all_numbers_disappeared_in_an_array.go">Github</a></p>
+</blockquote></div>
+                    <div class="post_footer">
+                        
+                        <div class="meta">
+                            <div class="info">
+                                <span class="field tags">
+                                    <i class="ri-stack-line"></i>
+                                    
+                                    <a href="https://helbing.github.io/blog/tags/leetcode/">leetcode</a>
+                                    
+                                </span>
+                            </div>
                         </div>
+                        
                     </div>
-                    
-                    <div class="listing_item">
-                        <div class="listing_post">
-                            <a href="/blog/posts/majority-element/">Majority Element</a>
-                            <div class="post_time"><span class="date">08-25</span></div>
-                        </div>
-                    </div>
-                    
-                    <div class="listing_item">
-                        <div class="listing_post">
-                            <a href="/blog/posts/best-time-to-buy-and-sell-stock/">Best Time to Buy and Sell Stock</a>
-                            <div class="post_time"><span class="date">08-25</span></div>
-                        </div>
-                    </div>
-                    
-                    <div class="listing_item">
-                        <div class="listing_post">
-                            <a href="/blog/posts/maximum-subarray/">Maximum Subarray</a>
-                            <div class="post_time"><span class="date">08-24</span></div>
-                        </div>
-                    </div>
-                    
-                    <div class="listing_item">
-                        <div class="listing_post">
-                            <a href="/blog/posts/coaching-for-performance/">《高绩效教练》读书笔记</a>
-                            <div class="post_time"><span class="date">08-23</span></div>
-                        </div>
-                    </div>
-                    
-                    <div class="listing_item">
-                        <div class="listing_post">
-                            <a href="/blog/posts/two-sum/">Two Sum</a>
-                            <div class="post_time"><span class="date">08-23</span></div>
-                        </div>
-                    </div>
-                    
-                    <div class="listing_item">
-                        <div class="listing_post">
-                            <a href="/blog/posts/the-mythical-man-month/">《人月神话》读书笔记</a>
-                            <div class="post_time"><span class="date">08-23</span></div>
-                        </div>
-                    </div>
-                    
-                    <div class="listing_item">
-                        <div class="listing_post">
-                            <a href="/blog/posts/toml-tutorial/">TOML 入门教程</a>
-                            <div class="post_time"><span class="date">07-13</span></div>
-                        </div>
-                    </div>
-                    
                 </div>
                 
+                
+                <div class="doc_comments"></div>
+                
             </div>
-            <div class="pagination"></div>
         </div>
-        <a id="back_to_top" href="#" class="back_to_top"><i class="ri-arrow-up-s-line"></i></a>
     </div>
+    <a id="back_to_top" href="#" class="back_to_top"><i class="ri-arrow-up-s-line"></i></a>
     <footer class="footer">
     <div class="powered_by">
         <a href="https://varkai.com">Designed by VarKai,</a>
