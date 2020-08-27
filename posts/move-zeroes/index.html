@@ -8,16 +8,16 @@
 	
 	
 	
-	<title>Tags ｜ DEMO</title>
+	<title>Move Zeroes ｜ DEMO</title>
 	
     
+    
+    <meta name="description" content="" />
     
 
     
 
 	
-	<link rel="alternate" type="application/rss+xml" href="https://helbing.github.io/blog/tags/index.xml" title="DEMO" />
-    
     
     <link rel="shortcut icon" href="https://helbing.github.io/blog/images/favicon.ico" />
 
@@ -83,40 +83,67 @@
     </div>
 </div>
         <div class="content">
-            <div class="page_tags">
-                <ul>
-                    
-                    
-                    
-                    <li>
-                        <a href="https://helbing.github.io/blog/tags/leetcode">
-                            leetcode <span class="terms_count">5</span>
-                        </a>
-                    </li>
-                    
-                    
-                    
-                    <li>
-                        <a href="https://helbing.github.io/blog/tags/reading">
-                            reading <span class="terms_count">2</span>
-                        </a>
-                    </li>
-                    
-                    
-                    
-                    <li>
-                        <a href="https://helbing.github.io/blog/tags/toml">
-                            toml <span class="terms_count">1</span>
-                        </a>
-                    </li>
-                    
-                    
-                </ul>
+            <div class="post_page">
+                <div class="post animate__animated animate__fadeInDown">
+                    <div class="post_title post_detail_title">
+                        <h2><a href='/blog/posts/move-zeroes/'>Move Zeroes</a></h2>
+                        <span class="date">2020.08.27</span>
+                    </div>
+                    <div class="post_content markdown"><h2 id="题目">题目</h2>
+<p>Given an array <code>nums</code>, write a function to move all <code>0's</code> to the end of it while maintaining the relative order of the non-zero elements.</p>
+<p>Example:</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">Input: [0,1,0,3,12]
+Output: [1,3,12,0,0]
+</code></pre></div><p>Note:</p>
+<ol>
+<li>You must do this in-place without making a copy of the array.</li>
+<li>Minimize the total number of operations.</li>
+</ol>
+<blockquote>
+<p>题目地址: <a href="https://leetcode-cn.com/problems/move-zeroes/">Move Zeroes</a></p>
+</blockquote>
+<h2 id="解题思路">解题思路</h2>
+<p>这道题看起来没啥边界问题，数据结构也可以直接使用数组，更多还是算法上的考虑，我的想法是直接使用双指针来解决</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">指针 i 用于遍历数组
+指针 j 用于交换数
+指针 i 发现当前自己的数不为0，就与指针 j 交换位置，保证非0的数按顺序在左侧
+</code></pre></div><p>代码如下</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">j</span> <span class="o">:=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="nx">i</span><span class="o">:=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">);</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">{</span>
+        <span class="nx">nums</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="p">=</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+        <span class="nx">j</span><span class="o">++</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="p">;</span> <span class="nx">j</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">);</span> <span class="nx">j</span><span class="o">++</span> <span class="p">{</span>
+    <span class="nx">nums</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="p">=</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre></div></div>
+                    <div class="post_footer">
+                        
+                        <div class="meta">
+                            <div class="info">
+                                <span class="field tags">
+                                    <i class="ri-stack-line"></i>
+                                    
+                                    <a href="https://helbing.github.io/blog/tags/leetcode/">leetcode</a>
+                                    
+                                </span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                
+                <div class="doc_comments"></div>
+                
             </div>
-            <div class="pagination"></div>
         </div>
-        <a id="back_to_top" href="#" class="back_to_top"><i class="ri-arrow-up-s-line"></i></a>
     </div>
+    <a id="back_to_top" href="#" class="back_to_top"><i class="ri-arrow-up-s-line"></i></a>
     <footer class="footer">
     <div class="powered_by">
         <a href="https://varkai.com">Designed by VarKai,</a>
