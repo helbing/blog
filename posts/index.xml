@@ -6,10 +6,22 @@
     <description>Recent content in Posts on DEMO</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 28 Aug 2020 14:22:58 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 29 Aug 2020 23:34:29 +0800</lastBuildDate>
     
 	<atom:link href="https://helbing.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>《人件》读书笔记</title>
+      <link>https://helbing.github.io/blog/posts/peopleware/</link>
+      <pubDate>Sat, 29 Aug 2020 23:34:29 +0800</pubDate>
+      
+      <guid>https://helbing.github.io/blog/posts/peopleware/</guid>
+      <description>&lt;p&gt;人件，peopleware，作者对照 software 创造的词，用于强调&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我们工作中的问题更多属于社会学范畴，而非技术范畴&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
     
     <item>
       <title>Shortest Unsorted Continuous Subarray</title>
