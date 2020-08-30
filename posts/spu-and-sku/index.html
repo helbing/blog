@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="helbing" />
+	
+	
+	
+	<title>商品 SPU 和 SKU 设计思考 ｜ DEMO</title>
+	
+    
+    
+    <meta name="description" content="最近由于公司业务调整需要开发一个电商系统，也就不得不涉及到 SPU 和 SKU 的设计。首先介绍下 SPU 和 SKU 的概念
+ SPU: Standard Product Unit，标准产品单位，指代的是一类商品的共同属性 SKU: Stock Keeping Unit，库存量单位，指代的是商品属性的库存量 " />
+    
+
+    
+
+	
+    
+    <link rel="shortcut icon" href="https://helbing.github.io/blog/images/favicon.ico" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="https://helbing.github.io/blog/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://helbing.github.io/blog/css/zozo.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://helbing.github.io/blog/css/highlight.css" />
+
+    
+    
+</head>
+
+<body>
+    <div class="main animate__animated animate__fadeInDown">
+        <div class="nav_container animated fadeInDown">
+    <div class="site_nav" id="site_nav">
+        <ul>
+            
+            <li>
+                <a href="/blog/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/blog/posts/">Archive</a>
+            </li>
+            
+            <li>
+                <a href="/blog/tags/">Tags</a>
+            </li>
+            
+            <li>
+                <a href="/blog/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="menu_icon">
+        <a id="menu_icon"><i class="ri-menu-line"></i></a>
+    </div>
+</div>
+        <div class="header animated fadeInDown">
+    <div class="site_title_container">
+        <div class="site_title">
+            <h1>
+                <a href="https://helbing.github.io/blog/">
+                    <span>DEMO</span>
+                </a>
+            </h1>
+        </div>
+        <div class="description">
+            <p class="sub_title"></p>
+            <div class="my_socials">
+                
+                
+                <a href="https://github.com/helbing" title="github" target="_blank"><i class="ri-github-fill"></i></a>
+                
+                
+                <a href="https://helbing.github.io/blog/index.xml" type="application/rss+xml" title="rss" target="_blank"><i
+                        class="ri-rss-fill"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="content">
+            <div class="post_page">
+                <div class="post animate__animated animate__fadeInDown">
+                    <div class="post_title post_detail_title">
+                        <h2><a href='/blog/posts/spu-and-sku/'>商品 SPU 和 SKU 设计思考</a></h2>
+                        <span class="date">2020.08.13</span>
+                    </div>
+                    <div class="post_content markdown"><p>最近由于公司业务调整需要开发一个电商系统，也就不得不涉及到 SPU 和 SKU 的设计。首先介绍下 SPU 和 SKU 的概念</p>
+<ul>
+<li>SPU: Standard Product Unit，标准产品单位，指代的是一类商品的共同属性</li>
+<li>SKU: Stock Keeping Unit，库存量单位，指代的是商品属性的库存量</li>
+</ul>
+<p>SPU 相比于 SKU 更好理解，也更好实现</p>
+<p><img src="/blog/774919BB-CF63-4B45-AA92-3BA6A8C83BD0.png" alt=""></p>
+<p>我们可以看到 3C 份类下的手机类产品都是有共同的商品属性的，比如</p>
+<ul>
+<li>品牌</li>
+<li>产品参数
+<ul>
+<li>产品名称</li>
+<li>3C产品型号</li>
+<li>型号</li>
+<li>网络模式</li>
+<li>等等</li>
+</ul>
+</li>
+</ul>
+<p><img src="/blog/E13E3CCE-EFD5-42F4-8214-60179BCA24C7.png" alt=""></p>
+<p>商品的 SPU 看起来还比较容易设计的。接下来我们来看 SKU</p>
+<p><img src="/blog/A2578FC5-E7CD-42B0-A750-961F2C344977.png" alt=""></p>
+<p>可以看到我们选择不同的商品 SKU，得到的库存数量和价格是不一样的。为了方便理解 SKU，我们来看看后台页面是如何设置商品 SKU 的</p>
+<p><img src="/blog/770652EE-0C2E-43E4-8873-CA9193507E28.png" alt=""></p>
+<p>有很多参数，但是我们着重看商品的多规格，价格和库存的设置即可。其实还可以理解为 SKU 是一种特殊的 SPU</p>
+<p><img src="/blog/B71CD667-6007-457C-8EE2-FF146FF3D96B.png" alt=""></p>
+<p>基于此我们给到前端的 SKU 接口大致如下</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;iPhone X&#34;</span>
+    <span class="s2">&#34;sku&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">&#34;price&#34;</span><span class="p">:</span> <span class="mi">5000</span><span class="p">,</span>
+            <span class="nt">&#34;stock&#34;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="nt">&#34;sku_combine&#34;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nt">&#34;attr_id&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="nt">&#34;attr_name&#34;</span><span class="p">:</span> <span class="s2">&#34;颜色&#34;</span><span class="p">,</span>
+                    <span class="nt">&#34;value_id&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="nt">&#34;value_name&#34;</span><span class="p">:</span> <span class="s2">&#34;红色&#34;</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="nt">&#34;attr_id&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="nt">&#34;attr_name&#34;</span><span class="p">:</span> <span class="s2">&#34;存储容量&#34;</span><span class="p">,</span>
+                    <span class="nt">&#34;value_id&#34;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                    <span class="nt">&#34;value_name&#34;</span><span class="p">:</span> <span class="s2">&#34;4+64G&#34;</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><p>电商系统相比于其他业务系统来说是比较复杂的，有不少设计业务上的设计难点，值得认真琢磨，SPU 和 SKU 就是一个。其他的比方说，购物车，优惠券，订单等，如果是 SaaS 平台，还需要考虑多租户。通过这篇文章，我们大概了解了商品 SPU 和 SKU 的设计，虽然不保证我这个设计是最优的，但是应该算是个还不错的设计，希望能给读者在设计商品 SPU 和 SKU 时带来一些帮助</p></div>
+                    <div class="post_footer">
+                        
+                        <div class="meta">
+                            <div class="info">
+                                <span class="field tags">
+                                    <i class="ri-stack-line"></i>
+                                    
+                                    <a href="https://helbing.github.io/blog/tags/system_design/">system_design</a>
+                                    
+                                </span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                
+                <div class="doc_comments"></div>
+                
+            </div>
+        </div>
+    </div>
+    <a id="back_to_top" href="#" class="back_to_top"><i class="ri-arrow-up-s-line"></i></a>
+    <footer class="footer">
+    <div class="powered_by">
+        <a href="https://varkai.com">Designed by VarKai,</a>
+        <a href="http://www.gohugo.io/">Proudly published with Hugo</a>
+    </div>
+
+    <div class="footer_slogan">
+        <span></span>
+    </div>
+</footer>
+    <script src="https://helbing.github.io/blog/js/jquery-3.5.1.min.js"></script>
+<link href="https://helbing.github.io/blog/css/fancybox.min.css" rel="stylesheet">
+<script src="https://helbing.github.io/blog/js/fancybox.min.js"></script>
+<script src="https://helbing.github.io/blog/js/zozo.js"></script>
+
+
+<script type="text/javascript" async
+    src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\[\[', '\]\]']],
+                processEscapes: true,
+                processEnvironments: true,
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+                TeX: {
+                    equationNumbers: { autoNumber: "AMS" },
+                    extensions: ["AMSmath.js", "AMSsymbols.js"]
+                }
+            }
+        });
+
+        MathJax.Hub.Queue(function () {
+            
+            
+            
+            var all = MathJax.Hub.getAllJax(), i;
+            for (i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+
+<style>
+    code.has-jax {
+        font: inherit;
+        font-size: 100%;
+        background: inherit;
+        border: inherit;
+        color: #515151;
+    }
+</style>
+
+
+
+</body>
+
+</html>

@@ -108,6 +108,19 @@
     </item>
     
     <item>
+      <title>商品 SPU 和 SKU 设计思考</title>
+      <link>https://helbing.github.io/blog/posts/spu-and-sku/</link>
+      <pubDate>Thu, 13 Aug 2020 21:40:36 +0800</pubDate>
+      
+      <guid>https://helbing.github.io/blog/posts/spu-and-sku/</guid>
+      <description>&lt;p&gt;最近由于公司业务调整需要开发一个电商系统，也就不得不涉及到 SPU 和 SKU 的设计。首先介绍下 SPU 和 SKU 的概念&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SPU: Standard Product Unit，标准产品单位，指代的是一类商品的共同属性&lt;/li&gt;
+&lt;li&gt;SKU: Stock Keeping Unit，库存量单位，指代的是商品属性的库存量&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
       <title>TOML 入门教程</title>
       <link>https://helbing.github.io/blog/posts/toml-tutorial/</link>
       <pubDate>Mon, 13 Jul 2020 00:00:00 +0800</pubDate>

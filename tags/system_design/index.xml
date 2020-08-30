@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>system_design on DEMO</title>
+    <link>https://helbing.github.io/blog/tags/system_design/</link>
+    <description>Recent content in system_design on DEMO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 13 Aug 2020 21:40:36 +0800</lastBuildDate>
+    
+	<atom:link href="https://helbing.github.io/blog/tags/system_design/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>商品 SPU 和 SKU 设计思考</title>
+      <link>https://helbing.github.io/blog/posts/spu-and-sku/</link>
+      <pubDate>Thu, 13 Aug 2020 21:40:36 +0800</pubDate>
+      
+      <guid>https://helbing.github.io/blog/posts/spu-and-sku/</guid>
+      <description>&lt;p&gt;最近由于公司业务调整需要开发一个电商系统，也就不得不涉及到 SPU 和 SKU 的设计。首先介绍下 SPU 和 SKU 的概念&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SPU: Standard Product Unit，标准产品单位，指代的是一类商品的共同属性&lt;/li&gt;
+&lt;li&gt;SKU: Stock Keeping Unit，库存量单位，指代的是商品属性的库存量&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
