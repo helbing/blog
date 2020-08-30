@@ -2,7 +2,7 @@
 title = "商品 SPU 和 SKU 设计思考"
 date = 2020-08-13T21:40:36+08:00
 tags = ["system_design"]
-draft = true
+draft = false
 +++
 
 最近由于公司业务调整需要开发一个电商系统，也就不得不涉及到 SPU 和 SKU 的设计。首先介绍下 SPU 和 SKU 的概念
