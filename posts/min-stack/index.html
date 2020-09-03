@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" >
 <head>
-	<meta name="generator" content="Hugo 0.74.3" />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,16 +8,16 @@
 	
 	
 	
-	<title>DEMO  </title>
+	<title>Min Stack ｜ DEMO</title>
 	
     
+    
+    <meta name="description" content="" />
     
 
     
 
 	
-	<link rel="alternate" type="application/rss+xml" href="https://helbing.github.io/blog/index.xml" title="DEMO" />
-    
     
     <link rel="shortcut icon" href="https://helbing.github.io/blog/images/favicon.ico" />
 
@@ -84,152 +83,72 @@
     </div>
 </div>
         <div class="content">
-            
+            <div class="post_page">
+                <div class="post animate__animated animate__fadeInDown">
+                    <div class="post_title post_detail_title">
+                        <h2><a href='/blog/posts/min-stack/'>Min Stack</a></h2>
+                        <span class="date">2020.09.03</span>
+                    </div>
+                    <div class="post_content markdown"><h2 id="题目">题目</h2>
+<p>Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.</p>
+<ul>
+<li>push(x) &ndash; Push element x onto stack.</li>
+<li>pop() &ndash; Removes the element on top of the stack.</li>
+<li>top() &ndash; Get the top element.</li>
+<li>getMin() &ndash; Retrieve the minimum element in the stack.</li>
+</ul>
+<p>Example 1:</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">Input
+[&#34;MinStack&#34;,&#34;push&#34;,&#34;push&#34;,&#34;push&#34;,&#34;getMin&#34;,&#34;pop&#34;,&#34;top&#34;,&#34;getMin&#34;]
+[[],[-2],[0],[-3],[],[],[],[]]
 
-<div class="post animated fadeInDown">
-    <div class="post_title">
-        <h2><a href='/blog/posts/maximum-subarray/'>Maximum Subarray</a></h2>
-    </div>
-    
-    <div class="list">
-        <div class="post_content markdown">
-            <p>......</p>
-        </div>
-    </div>
-    
-    <div class="post_footer">
-        <div class="meta">
-            <div class="info">
-                <span class="field">
-                    <i class="ri-map-pin-time-line"></i>
-                    <span class="date">2020.08.24</span>
-                </span>
-                
-                <span class="field tags">
-                    <i class="ri-stack-line"></i>
-                    
-                    <a href="https://helbing.github.io/blog/tags/leetcode/">leetcode</a>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
-</div>
+Output
+[null,null,null,null,-3,null,0,-2]
 
-<div class="post animated fadeInDown">
-    <div class="post_title">
-        <h2><a href='/blog/posts/coaching-for-performance/'>《高绩效教练》读书笔记</a></h2>
-    </div>
-    
-    <div class="list">
-        <div class="post_content markdown">
-            <p>......</p>
-        </div>
-    </div>
-    
-    <div class="post_footer">
-        <div class="meta">
-            <div class="info">
-                <span class="field">
-                    <i class="ri-map-pin-time-line"></i>
-                    <span class="date">2020.08.23</span>
-                </span>
-                
-                <span class="field tags">
-                    <i class="ri-stack-line"></i>
-                    
-                    <a href="https://helbing.github.io/blog/tags/reading/">reading</a>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="post animated fadeInDown">
-    <div class="post_title">
-        <h2><a href='/blog/posts/two-sum/'>Two Sum</a></h2>
-    </div>
-    
-    <div class="list">
-        <div class="post_content markdown">
-            <p>......</p>
-        </div>
-    </div>
-    
-    <div class="post_footer">
-        <div class="meta">
-            <div class="info">
-                <span class="field">
-                    <i class="ri-map-pin-time-line"></i>
-                    <span class="date">2020.08.23</span>
-                </span>
-                
-                <span class="field tags">
-                    <i class="ri-stack-line"></i>
-                    
-                    <a href="https://helbing.github.io/blog/tags/leetcode/">leetcode</a>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="post animated fadeInDown">
-    <div class="post_title">
-        <h2><a href='/blog/posts/the-mythical-man-month/'>《人月神话》读书笔记</a></h2>
-    </div>
-    
-    <div class="list">
-        <div class="post_content markdown">
-            <p><p>首先用代序中我很认同的一句话作为开头</p>
+Explanation
+MinStack minStack = new MinStack();
+minStack.push(-2);
+minStack.push(0);
+minStack.push(-3);
+minStack.getMin(); // return -3
+minStack.pop();
+minStack.top();    // return 0
+minStack.getMin(); // return -2
+</code></pre></div><p>Constraints:</p>
+<ul>
+<li>Methods pop, top and getMin operations will always be called on <code>non-empty</code>stacks.</li>
+</ul>
 <blockquote>
-<p>回首软件工程近40年的发展，Jackson 哀叹软件行业普遍缺乏专业性，充满了业余人员，“手中有一个锤子，看到什么都是钉子”，谁都能开发性命攸关的软件</p>
-</blockquote>......</p>
-        </div>
-    </div>
-    
-    <div class="post_footer">
-        <div class="meta">
-            <div class="info">
-                <span class="field">
-                    <i class="ri-map-pin-time-line"></i>
-                    <span class="date">2020.08.23</span>
-                </span>
+<p>题目地址: <a href="https://leetcode-cn.com/problems/min-stack/">Min Stack</a></p>
+</blockquote>
+<h2 id="解题思路">解题思路</h2>
+<p>这道题解题方式就是用两个数据栈，一个用于存储全部值，一个用于存储最小值</p>
+<blockquote>
+<p>答案地址: <a href="https://github.com/helbing/leetcode/blob/master/stack/min_stack.go">Github</a></p>
+</blockquote></div>
+                    <div class="post_footer">
+                        
+                        <div class="meta">
+                            <div class="info">
+                                <span class="field tags">
+                                    <i class="ri-stack-line"></i>
+                                    
+                                    <a href="https://helbing.github.io/blog/tags/leetcode/">leetcode</a>
+                                    
+                                </span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
                 
-                <span class="field tags">
-                    <i class="ri-stack-line"></i>
-                    
-                    <a href="https://helbing.github.io/blog/tags/reading/">reading</a>
-                    
-                </span>
+                
+                <div class="doc_comments"></div>
                 
             </div>
         </div>
     </div>
-</div>
-
-
-<div class="pagination">
-    
-    
-    <a href="/blog/page/2/" class="pre">
-        Prev
-    </a>
-    
-    
-    <a href="/blog/page/4/" class="next">
-        Next
-    </a>
-    
-    
-</div>
-        </div>
-    </div>
+    <a id="back_to_top" href="#" class="back_to_top"><i class="ri-arrow-up-s-line"></i></a>
     <footer class="footer">
     <div class="powered_by">
         <a href="https://varkai.com">Designed by VarKai,</a>
