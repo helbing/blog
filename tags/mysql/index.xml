@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mysql on DEMO</title>
+    <link>https://helbing.github.io/blog/tags/mysql/</link>
+    <description>Recent content in mysql on DEMO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 07 Sep 2020 06:52:16 +0800</lastBuildDate>
+    
+	<atom:link href="https://helbing.github.io/blog/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>关系型数据库规范</title>
+      <link>https://helbing.github.io/blog/posts/relational-database-specification/</link>
+      <pubDate>Mon, 07 Sep 2020 06:52:16 +0800</pubDate>
+      
+      <guid>https://helbing.github.io/blog/posts/relational-database-specification/</guid>
+      <description>&lt;p&gt;这是一套我正在使用的规范，所有的规范遵守&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;必须 (MUST)，严格遵循&lt;/li&gt;
+&lt;li&gt;一定不 (MUST NOT)，严格禁止&lt;/li&gt;
+&lt;li&gt;应该 (SHOULD)，建议，不强求&lt;/li&gt;
+&lt;li&gt;不应该 (SHOULD NOT) 不建议，不强求&lt;/li&gt;
+&lt;li&gt;等等，其他的可以看 &lt;a href=&#34;https://www.ietf.org/rfc/rfc2119.txt&#34;&gt;rfc2119&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

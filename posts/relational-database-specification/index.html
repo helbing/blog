@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="helbing" />
+	
+	
+	
+	<title>关系型数据库规范 ｜ DEMO</title>
+	
+    
+    
+    <meta name="description" content="这是一套我正在使用的规范，所有的规范遵守
+ 必须 (MUST)，严格遵循 一定不 (MUST NOT)，严格禁止 应该 (SHOULD)，建议，不强求 不应该 (SHOULD NOT) 不建议，不强求 等等，其他的可以看 rfc2119 " />
+    
+
+    
+
+	
+    
+    <link rel="shortcut icon" href="https://helbing.github.io/blog/images/favicon.ico" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="https://helbing.github.io/blog/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://helbing.github.io/blog/css/zozo.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://helbing.github.io/blog/css/highlight.css" />
+
+    
+    
+</head>
+
+<body>
+    <div class="main animate__animated animate__fadeInDown">
+        <div class="nav_container animated fadeInDown">
+    <div class="site_nav" id="site_nav">
+        <ul>
+            
+            <li>
+                <a href="/blog/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/blog/posts/">Archive</a>
+            </li>
+            
+            <li>
+                <a href="/blog/tags/">Tags</a>
+            </li>
+            
+            <li>
+                <a href="/blog/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="menu_icon">
+        <a id="menu_icon"><i class="ri-menu-line"></i></a>
+    </div>
+</div>
+        <div class="header animated fadeInDown">
+    <div class="site_title_container">
+        <div class="site_title">
+            <h1>
+                <a href="https://helbing.github.io/blog/">
+                    <span>DEMO</span>
+                </a>
+            </h1>
+        </div>
+        <div class="description">
+            <p class="sub_title"></p>
+            <div class="my_socials">
+                
+                
+                <a href="https://github.com/helbing" title="github" target="_blank"><i class="ri-github-fill"></i></a>
+                
+                
+                <a href="https://helbing.github.io/blog/index.xml" type="application/rss+xml" title="rss" target="_blank"><i
+                        class="ri-rss-fill"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="content">
+            <div class="post_page">
+                <div class="post animate__animated animate__fadeInDown">
+                    <div class="post_title post_detail_title">
+                        <h2><a href='/blog/posts/relational-database-specification/'>关系型数据库规范</a></h2>
+                        <span class="date">2020.09.07</span>
+                    </div>
+                    <div class="post_content markdown"><p>这是一套我正在使用的规范，所有的规范遵守</p>
+<ul>
+<li>必须 (MUST)，严格遵循</li>
+<li>一定不 (MUST NOT)，严格禁止</li>
+<li>应该 (SHOULD)，建议，不强求</li>
+<li>不应该 (SHOULD NOT) 不建议，不强求</li>
+<li>等等，其他的可以看 <a href="https://www.ietf.org/rfc/rfc2119.txt">rfc2119</a></li>
+</ul>
+<h2 id="数据库与数据表">数据库与数据表</h2>
+<ul>
+<li>[MUST] 库名与表名必须控制在 32 个字符以内</li>
+<li>[MUST] 库名与表名的命名必须使用小写字母，数组与下划线</li>
+<li>[SHOULD] 库名与表名不使用复数名词，仅仅用于解释含义</li>
+<li>[MUST] 数据库与数据表必须注释且必须及时更新</li>
+<li>[SHOULD] 字符集使用 <code>utf8mb4</code>，不然存储不了 emoji，校验规则使用 <code>utf8mb4-unicode-ci</code></li>
+<li>[SHOULD] 每个数据表应该有 <code>id</code>，<code>created_at</code> 和 <code>updated_at</code> 这三个字段
+<ul>
+<li><code>id bigint unsigned not null auto_increment</code></li>
+<li><code>created_at timestamp not null default current_timstamp</code></li>
+<li>`updated_at timestamp not null default current_timestamp current_timestamp on update current_timestamp</li>
+</ul>
+</li>
+<li>[SHOULD] 多对多的关联表命名规则为 <code>xxx_xxx_relation</code>，假设有两个表 <code>user</code> 和 <code>book</code>，那它们的多对多关联表为 <code>user_book_relation</code></li>
+</ul>
+<h2 id="列字段">列字段</h2>
+<ul>
+<li>[MUST] 列字段名必须使用小写字母，数组与下划线</li>
+<li>[MUST] 时间类型的列字段的数据类型必须是 <code>timestamp</code>，命名方式必须是 <code>xxxx_at</code></li>
+<li>[MUST] 列字段名禁止使用保留字，不止是 SQL 保留字，也包括编程语言的保留字，如 <code>class</code>，<code>select</code> 等</li>
+<li>[MUST] 列值如果一定为正数必须使用 <code>unsigned</code> 关键字约束</li>
+<li>[MUST] 列字段用于表达是否的概念，必须是 <code>is_xxx</code> 的命名方式，数据类型必须是 <code>tinyint unsigned</code>，0 表示否，1 表示是</li>
+<li>[SHOULD] 列字段如果是用于枚举，应该从 1 开始，这会给开发的时候带来很大的便利</li>
+<li>[MUST] 列字段必须设置默认值，如
+<ul>
+<li>varchar 和 char 默认值为 null</li>
+<li>text 默认值为 null</li>
+<li>timestamp 默认值为 null，除了 <code>created_at</code> 和 <code>updated_at</code></li>
+<li>等等</li>
+</ul>
+</li>
+<li>[MUST] 列字段如果长度基本固定，必须使用 <code>char</code></li>
+<li>[MUST] 列字段必须注释且必须及时更新</li>
+<li>[SHOULD] 列字段可以适当冗余，减少关联查询提高查询效率。不必执着于三范式，需要注意的是冗余的字段不应该是
+<ul>
+<li>频繁更新的字段</li>
+<li>长 varchar 或 text 等</li>
+</ul>
+</li>
+<li>[SHOULD] 软删除的列字段建议使用 `deleted_at timestamp default null</li>
+<li>[SHOULD] 数据表的列字段数建议少于 20 个，最多不超过 50 个</li>
+</ul>
+<h2 id="索引">索引</h2>
+<ul>
+<li>[MUST] 对于列值一定是唯一的情况，必须使用唯一索引进行约束，如订单号</li>
+<li>[SHOULD] 单表的索引数量不应该超过 5 个，对于 InnoDB 来说，太多的索引会影响 insert 和 update 的效率</li>
+<li>[SHOULD] 索引命名规范
+<ul>
+<li>普通索引 <code>idx_xxx</code></li>
+<li>唯一索引 <code>uk_xxx</code></li>
+<li>主键索引 <code>pk_xxx</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="开发规范">开发规范</h2>
+<ul>
+<li>[MUST] 避免数据类型的强制转换</li>
+<li>[MUST] 禁止跨库查询，应当使用不同的数据库账号分开查询</li>
+<li>[SHOULD] 如果预计三年内达不到单表 500 万行或者单表容量达到 2GB，那么在创建表的时候不建议考虑分库分表</li>
+<li>[MUST] 对长 varchar，text 类型等建立索引时，必须使用指定前缀索引，指定索引长度</li>
+<li>[MUST] 禁止模糊查询时使用左模糊和全模糊，如果需要的话使用搜索引擎解决</li>
+<li>[MUST] 设计数据库表与字段时，需要足够抽线，这样便于后续拓展</li>
+<li>[MUST] 对于程序连接数据库的账号，遵循权限最小原则</li>
+</ul></div>
+                    <div class="post_footer">
+                        
+                        <div class="meta">
+                            <div class="info">
+                                <span class="field tags">
+                                    <i class="ri-stack-line"></i>
+                                    
+                                    <a href="https://helbing.github.io/blog/tags/mysql/">mysql</a>
+                                    
+                                </span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                
+                <div class="doc_comments"></div>
+                
+            </div>
+        </div>
+    </div>
+    <a id="back_to_top" href="#" class="back_to_top"><i class="ri-arrow-up-s-line"></i></a>
+    <footer class="footer">
+    <div class="powered_by">
+        <a href="https://varkai.com">Designed by VarKai,</a>
+        <a href="http://www.gohugo.io/">Proudly published with Hugo</a>
+    </div>
+
+    <div class="footer_slogan">
+        <span></span>
+    </div>
+</footer>
+    <script src="https://helbing.github.io/blog/js/jquery-3.5.1.min.js"></script>
+<link href="https://helbing.github.io/blog/css/fancybox.min.css" rel="stylesheet">
+<script src="https://helbing.github.io/blog/js/fancybox.min.js"></script>
+<script src="https://helbing.github.io/blog/js/zozo.js"></script>
+
+
+<script type="text/javascript" async
+    src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\[\[', '\]\]']],
+                processEscapes: true,
+                processEnvironments: true,
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+                TeX: {
+                    equationNumbers: { autoNumber: "AMS" },
+                    extensions: ["AMSmath.js", "AMSsymbols.js"]
+                }
+            }
+        });
+
+        MathJax.Hub.Queue(function () {
+            
+            
+            
+            var all = MathJax.Hub.getAllJax(), i;
+            for (i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+
+<style>
+    code.has-jax {
+        font: inherit;
+        font-size: 100%;
+        background: inherit;
+        border: inherit;
+        color: #515151;
+    }
+</style>
+
+
+
+</body>
+
+</html>
